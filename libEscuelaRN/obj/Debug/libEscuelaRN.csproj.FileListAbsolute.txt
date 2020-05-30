@@ -1,0 +1,15 @@
+E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\bin\Debug\libEscuelaRN.dll
+E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\bin\Debug\libEscuelaRN.pdb
+E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\bin\Debug\libConexionBd.dll
+E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\bin\Debug\libLlenarCombos.dll
+E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\bin\Debug\libLlenarGrids.dll
+E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\bin\Debug\libLeerParametrosCnx.dll
+E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\bin\Debug\libConexionBd.pdb
+E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\bin\Debug\libLlenarCombos.pdb
+E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\bin\Debug\libLlenarGrids.pdb
+E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\bin\Debug\libLeerParametrosCnx.pdb
+E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\obj\Debug\libEscuelaRN.csprojAssemblyReference.cache
+E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\obj\Debug\libEscuelaRN.csproj.CoreCompileInputs.cache
+E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\obj\Debug\libEscuelaRN.csproj.CopyComplete
+E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\obj\Debug\libEscuelaRN.dll
+E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\obj\Debug\libEscuelaRN.pdb

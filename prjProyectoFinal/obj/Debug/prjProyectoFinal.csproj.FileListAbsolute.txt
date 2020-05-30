@@ -1,0 +1,124 @@
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\prjProyectoFinal.dll.config
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\prjProyectoFinal.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\prjProyectoFinal.pdb
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\csc.exe
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\csc.exe.config
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\csc.rsp
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\csi.exe
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\csi.exe.config
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\csi.rsp
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.AppContext.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Console.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.IO.Compression.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.IO.Pipes.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Security.Claims.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.ValueTuple.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Xml.XPath.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\vbc.exe
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\vbc.exe.config
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\vbc.rsp
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\VBCSCompiler.exe
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\obj\Debug\prjProyectoFinal.csprojAssemblyReference.cache
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\obj\Debug\prjProyectoFinal.csproj.CoreCompileInputs.cache
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\obj\Debug\prjProyectoFinal.csproj.CopyComplete
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\obj\Debug\prjProyectoFinal.dll
+C:\Users\jhoan\source\repos\slnProyectoFinal\prjProyectoFinal\obj\Debug\prjProyectoFinal.pdb
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\prjProyectoFinal.dll.config
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\prjProyectoFinal.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\prjProyectoFinal.pdb
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\csc.exe
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\csc.exe.config
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\csc.rsp
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\csi.exe
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\csi.exe.config
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\csi.rsp
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.Managed.Core.targets
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.AppContext.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Collections.Immutable.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Console.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.IO.Compression.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.IO.FileSystem.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.IO.Pipes.AccessControl.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.IO.Pipes.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Reflection.Metadata.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Security.AccessControl.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Security.Claims.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Security.Cryptography.Encoding.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Security.Cryptography.Primitives.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Security.Principal.Windows.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Text.Encoding.CodePages.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.ValueTuple.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Xml.XmlDocument.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Xml.XPath.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\System.Xml.XPath.XDocument.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\vbc.exe
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\vbc.exe.config
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\vbc.rsp
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\VBCSCompiler.exe
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\roslyn\VBCSCompiler.exe.config
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\obj\Debug\prjProyectoFinal.csprojAssemblyReference.cache
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\obj\Debug\prjProyectoFinal.csproj.CoreCompileInputs.cache
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\obj\Debug\prjProyectoFinal.csproj.CopyComplete
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\obj\Debug\prjProyectoFinal.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\obj\Debug\prjProyectoFinal.pdb
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\libEscuelaOpe.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\libEscuelaRN.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\libConexionBd.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\libLlenarGrids.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\libLlenarCombos.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\libLeerParametrosCnx.dll
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\libEscuelaOpe.pdb
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\libEscuelaRN.pdb
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\libConexionBd.pdb
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\libLlenarGrids.pdb
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\libLlenarCombos.pdb
+E:\Proyecto C#\slnProyectoFinal\prjProyectoFinal\bin\libLeerParametrosCnx.pdb

@@ -1,0 +1,17 @@
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\obj\Debug\libEscuelaOpe.csprojAssemblyReference.cache
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\obj\Debug\libEscuelaOpe.csproj.CoreCompileInputs.cache
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\bin\Debug\libEscuelaOpe.dll
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\bin\Debug\libEscuelaOpe.pdb
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\bin\Debug\libEscuelaRN.dll
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\bin\Debug\libLlenarGrids.dll
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\bin\Debug\libConexionBd.dll
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\bin\Debug\libLlenarCombos.dll
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\bin\Debug\libLeerParametrosCnx.dll
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\bin\Debug\libEscuelaRN.pdb
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\bin\Debug\libLlenarGrids.pdb
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\bin\Debug\libConexionBd.pdb
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\bin\Debug\libLlenarCombos.pdb
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\bin\Debug\libLeerParametrosCnx.pdb
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\obj\Debug\libEscuelaOpe.csproj.CopyComplete
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\obj\Debug\libEscuelaOpe.dll
+E:\Proyecto C#\slnProyectoFinal\libEscuelaOpe\obj\Debug\libEscuelaOpe.pdb

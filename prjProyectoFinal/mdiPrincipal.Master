@@ -1,0 +1,85 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="mdiPrincipal.Master.cs" Inherits="prjProyectoFinal.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Escuela de Deportes</title>
+    <link href="css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/Practica4.css" rel="stylesheet" />
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body style="background-color:black">
+    <form id="frmMaestroPrincipal" runat="server" style="background-color:black">
+        <br />
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body" style="background-image:url('imagenes/Fondo.jpg')">
+                    <div class="container">
+                        <div class="row Centrar-Medio">
+                            <div class="col-md-4 Centrar-Medio">
+                                <br />
+                                <asp:Image ID="imgLogoEscuela" runat="server" CssClass="img-responsive" ImageUrl="~/imagenes/LogoEscuela.jpg" />
+                            </div>
+                            <div class="col-md-8 Centrar-Medio">
+                                    <asp:Label ID="lblTitulo" runat="server" CssClass="h2" Text="Porque con nosotros desarrollas todas tus habilidades..." Font-Bold="true" ></asp:Label>
+                            </div>
+                        </div>
+                        <br />  
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="navbar navbar-default">
+                                    <div class="collapse navbar-collapse" id="navbarPpal">
+                                        <asp:Menu ID="mnuPpal" runat="server" Orientation="Horizontal" RenderingMode="List" IncludeStyleBlock="false" StaticMenuStyle-CssClass="nav navbar-nav" DynamicMenuStyle-CssClass="dropdown-menu">
+                                            <Items>
+                                                <asp:MenuItem Text="Inicio" Value="opcInicio" NavigateUrl="~/frmPrincipal.aspx"></asp:MenuItem>
+                                                <asp:MenuItem Text="Ingresar" Value="opcIngresar">
+                                                    <asp:MenuItem NavigateUrl="~/frmLogin.aspx" Text="Iniciar sesión" Value="opcMatriculas"></asp:MenuItem>
+                                                </asp:MenuItem>
+                                                <asp:MenuItem Text="Padres" Value="opcPadres">
+                                                    <asp:MenuItem NavigateUrl="~/frmGestHijo.aspx" Text="Gestionar Hijos" Value="opcGestHijos"></asp:MenuItem>
+                                                    <asp:MenuItem NavigateUrl="" Text="Aprobar/Rechazar-Matricula-(EN CONSTRUCCIÓN)" Value="opcAproRechMtr"></asp:MenuItem>
+                                                </asp:MenuItem>
+                                                <asp:MenuItem Text="Profesores" Value="opcProfesores">
+                                                    <asp:MenuItem NavigateUrl="" Text="Consultar mis deportes-(EN CONSTRUCCIÓN)" Value="opcConsDep"></asp:MenuItem>
+                                                    <asp:MenuItem NavigateUrl="" Text="Consultar mis grupos-(EN CONSTRUCCIÓN)" Value="opcConsGrup"></asp:MenuItem>
+                                                </asp:MenuItem>
+                                                <asp:MenuItem Text="Estudiantes" Value="opcEstudiantes">
+                                                    <asp:MenuItem NavigateUrl="~/frmMatricularDep.aspx" Text="Matricular Deportes" Value="opcMatrDep"></asp:MenuItem>
+                                                    <asp:MenuItem NavigateUrl="" Text="Consultar mis horarios-(EN CONSTRUCCIÓN)" Value="opcConsHor"></asp:MenuItem>
+                                                </asp:MenuItem>
+                                                <asp:MenuItem Text="Directores" Value="opcDirectores">
+                                                    <asp:MenuItem Text="Gestionar" Value="opcGestionar">
+                                                        <asp:MenuItem NavigateUrl="~/frmGestUsuario.aspx" Text="Usuarios" Value="opcUsuario"></asp:MenuItem>
+                                                        <asp:MenuItem NavigateUrl="~/frmGestGrupo.aspx" Text="Grupos" Value="opcGrupo"></asp:MenuItem>
+                                                    </asp:MenuItem>
+                                                </asp:MenuItem>
+                                                <asp:MenuItem Text="Informes" Value="opcInformes"></asp:MenuItem>
+                                            </Items>
+                                        </asp:Menu>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="navbar navbar-default Centrar-Medio">
+                                    <div class="collapse navbar-collapse" id="userConex">
+                                        <asp:Label ID="lblUserConex" runat="server" Text="Desconectado"></asp:Label>
+                                    </div>   
+                                </div>
+                            </div>
+                        </div>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            <h2>Páginas Hijas</h2>
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
