@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <parametros>
-	<Servidor>DESKTOP-3966POO\PRUEBA</Servidor>
+	<Servidor>DESKTOP-3966POO\SQLEXPRESS</Servidor>
 	<BaseDatos>escuela</BaseDatos>
   <SeguridadIntegrada>SI</SeguridadIntegrada>
 	<Usuario></Usuario>
