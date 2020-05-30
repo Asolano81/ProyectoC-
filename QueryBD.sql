@@ -114,3 +114,10 @@ select usuarios.id,usuarios.nombre,roles.id as rolId,roles.descripcion from usua
 join rol_usuario on rol_usuario.usuario_id = usuarios.id
 join roles on rol_usuario.rol_id = roles.id
 where usuario_id = 1
+
+
+CREATE PROCEDURE [dbo].[SP_ConsultarRoles] AS
+	BEGIN
+		SELECT id,descripcion FROM roles	
+	END
+GO
