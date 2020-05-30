@@ -13,3 +13,15 @@ E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\obj\Debug\libEscuelaRN.csproj.CoreC
 E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\obj\Debug\libEscuelaRN.csproj.CopyComplete
 E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\obj\Debug\libEscuelaRN.dll
 E:\Proyecto C#\slnProyectoFinal\libEscuelaRN\obj\Debug\libEscuelaRN.pdb
+C:\JOHAN\Desarrollo de Software Empresarial\GIT\ProyectoC-\libEscuelaRN\bin\Debug\libEscuelaRN.dll
+C:\JOHAN\Desarrollo de Software Empresarial\GIT\ProyectoC-\libEscuelaRN\bin\Debug\libEscuelaRN.pdb
+C:\JOHAN\Desarrollo de Software Empresarial\GIT\ProyectoC-\libEscuelaRN\bin\Debug\libLeerParametrosCnx.dll
+C:\JOHAN\Desarrollo de Software Empresarial\GIT\ProyectoC-\libEscuelaRN\bin\Debug\libConexionBd.pdb
+C:\JOHAN\Desarrollo de Software Empresarial\GIT\ProyectoC-\libEscuelaRN\bin\Debug\libLlenarCombos.pdb
+C:\JOHAN\Desarrollo de Software Empresarial\GIT\ProyectoC-\libEscuelaRN\bin\Debug\libLlenarGrids.pdb
+C:\JOHAN\Desarrollo de Software Empresarial\GIT\ProyectoC-\libEscuelaRN\bin\Debug\libLeerParametrosCnx.pdb
+C:\JOHAN\Desarrollo de Software Empresarial\GIT\ProyectoC-\libEscuelaRN\obj\Debug\libEscuelaRN.csprojAssemblyReference.cache
+C:\JOHAN\Desarrollo de Software Empresarial\GIT\ProyectoC-\libEscuelaRN\obj\Debug\libEscuelaRN.csproj.CoreCompileInputs.cache
+C:\JOHAN\Desarrollo de Software Empresarial\GIT\ProyectoC-\libEscuelaRN\obj\Debug\libEscuelaRN.csproj.CopyComplete
+C:\JOHAN\Desarrollo de Software Empresarial\GIT\ProyectoC-\libEscuelaRN\obj\Debug\libEscuelaRN.dll
+C:\JOHAN\Desarrollo de Software Empresarial\GIT\ProyectoC-\libEscuelaRN\obj\Debug\libEscuelaRN.pdb
