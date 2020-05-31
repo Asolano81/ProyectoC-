@@ -19,6 +19,7 @@ namespace libEscuelaOpe
         private string strContrasena;
         private string strIdentificacion;
         private string strNombre;
+        private string strRol;
         private string strApellido;
         private string strFechaNacimiento;
         private string strTelefono;
@@ -34,14 +35,15 @@ namespace libEscuelaOpe
         #region "Constructor"
         public clsUsuariosOPE(string nombreApp)
         {
-            this.strNombreApp = nombreApp;
-            
-           
+            this.strNombreApp = nombreApp;    
         }
         #endregion
 
         #region "Propiedades"
-
+        public string Nombre { get => strNombre; }
+        public string Rol { get => strRol; }
+        public string Identificacion { get => strIdentificacion; }
+        public string Error { get => strError; }
         #endregion
 
         #region "Métodos Privados"       
@@ -113,6 +115,36 @@ namespace libEscuelaOpe
             }
         }  
         */
+
+        public bool consConex()
+        {
+            try
+            {
+                clsUsuariosRN objConsRn = new clsUsuariosRN(strNombreApp);
+
+                if (!objConsRn.consConex())
+                {
+                    objConsRn = null;
+                    return false;
+                }
+                if (objConsRn.DatosRptaBd.Tables[0].Rows.Count == 0)
+                {
+                    strError = "No hay conexion";
+                    return false;
+                }
+                strNombre = objConsRn.DatosRptaBd.Tables[0].Rows[0]["nombre"].ToString();
+                strIdentificacion = objConsRn.DatosRptaBd.Tables[0].Rows[0]["identificacion"].ToString();
+                strRol = objConsRn.DatosRptaBd.Tables[0].Rows[0]["rol"].ToString();
+                objConsRn = null;
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         #endregion
 
 

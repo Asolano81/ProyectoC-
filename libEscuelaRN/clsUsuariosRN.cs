@@ -44,6 +44,7 @@ namespace libEscuelaRN
         public string NombreUsuario { set => strNombreUsuario = value; }
         public string Contrasena { set => strContrasena = value; }
         public int IntIdUsuario { get => intIdUsuario; set => intIdUsuario = value; }
+        public DataSet DatosRptaBd { get => dsDatos; }
         #endregion
 
         #region "Métodos Privados"
@@ -137,6 +138,33 @@ namespace libEscuelaRN
             }
         }
 
+        public bool consConex()
+        {
+            try
+            {
+                clsConexionBd objCnx = new clsConexionBd(strNombreApp);
+
+                objCnx.SQL = "SP_ConsultarConexion";
+                objCnx.ParametrosSQL = objDatosUsuario;
+
+                if (!objCnx.llenarDataSet(false, true))
+                {
+                    strError = objCnx.Error;
+                    objCnx.cerrarCnx();
+                    objCnx = null;
+                    return false;
+                }
+                dsDatos = objCnx.DataSetLleno;
+                objCnx.cerrarCnx();
+                objCnx = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         #endregion
     }
 }

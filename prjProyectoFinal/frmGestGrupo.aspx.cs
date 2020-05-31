@@ -26,6 +26,7 @@ namespace prjProyectoFinal
             }
             this.lblAccion.Visible = true;
         }
+
         private void llenarDropDown(DropDownList ddlDrop)
         {
             try
@@ -78,7 +79,7 @@ namespace prjProyectoFinal
                 if (cbxHoraInicio.SelectedIndex != 14 && cbxHoraInicio.SelectedIndex != 15)
                 {
                     cbxHoraInicio.SelectedIndex = cbxHoraInicio.SelectedIndex + 2;
-                    txtHoraFin.Text = string.Empty;
+                    txtHoraFin.Text = cbxHoraInicio.SelectedValue;
                     cbxHoraInicio.SelectedIndex = cbxHoraInicio.SelectedIndex + -2;
                 }
                 else
