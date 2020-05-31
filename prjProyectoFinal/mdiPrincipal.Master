@@ -35,7 +35,7 @@
                             <div class="col-md-8">
                                 <div class="navbar navbar-default">
                                     <div class="collapse navbar-collapse" id="navbarPpal">
-                                        <asp:Menu ID="mnuPpal" runat="server" Orientation="Horizontal" RenderingMode="List" IncludeStyleBlock="false" StaticMenuStyle-CssClass="nav navbar-nav" DynamicMenuStyle-CssClass="dropdown-menu">
+                                        <asp:Menu ID="mnuPpal" runat="server" Orientation="Horizontal" RenderingMode="List" IncludeStyleBlock="false" StaticMenuStyle-CssClass="nav navbar-nav" DynamicMenuStyle-CssClass="dropdown-menu hide">
                                             <Items>
                                                 <asp:MenuItem Text="Inicio" Value="opcInicio" NavigateUrl="~/frmPrincipal.aspx"></asp:MenuItem>
                                                 <asp:MenuItem Text="Ingresar" Value="opcIngresar">
