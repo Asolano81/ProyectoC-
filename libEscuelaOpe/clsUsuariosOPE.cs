@@ -45,6 +45,8 @@ namespace libEscuelaOpe
         public string Rol { get => strRol; set => strRol = value; }
         public string Identificacion { get => strIdentificacion; set => strIdentificacion = value; }
         public string Error { get => strError; }
+        public string Contrasena { get => strContrasena; set => strContrasena = value; }
+
         #endregion
 
         #region "Métodos Privados"       
@@ -65,7 +67,7 @@ namespace libEscuelaOpe
                     }
                     if (strContrasena == string.Empty)
                     {
-                        strError = "LÑa contraseña no puede estar vacia";
+                        strError = "La contraseña no puede estar vacia";
                         return false;
                     }
                     break;
@@ -76,47 +78,8 @@ namespace libEscuelaOpe
 
         #endregion
 
-        #region "Métodos públicos"   
-
-        /*public bool llenarDrop()
-        {
-            try
-            {
-                if (!validar("llenarDrop"))
-                {
-                    return false;
-                }
-
-                clsUsuariosRN objRn = new clsUsuariosRN(strNombreApp);
-                switch (ddlGen.ID.ToLower())
-                {
-                    case "dll":
-                        objRn.Asignatura = intIdAsignatura;
-                        break;
-                    case "ddlaula":
-                        objRn.Asignatura = intIdAsignatura;
-                        objRn.Docente = intIdDocente;
-                        break;
-                }
-
-
-                if (!objRn.llenarDropDowns(ddlGen))
-                {
-                    strError = objRn.Error;
-                    objRn = null;
-                    return false;
-                }
-                objRn = null;
-                return true;
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }  
-        */
-
+        #region "Métodos públicos"
+    
         public bool consConex()
         {
             try
@@ -134,7 +97,7 @@ namespace libEscuelaOpe
                     return false;
                 }
                 strNombre = objConsRn.DatosRptaBd.Tables[0].Rows[0]["nombre"].ToString();
-                strIdentificacion = objConsRn.DatosRptaBd.Tables[0].Rows[0]["identificacion"].ToString();
+                strContrasena = objConsRn.DatosRptaBd.Tables[0].Rows[0]["contrasena"].ToString();
                 strRol = objConsRn.DatosRptaBd.Tables[0].Rows[0]["rol"].ToString();
                 objConsRn = null;
 
@@ -151,15 +114,15 @@ namespace libEscuelaOpe
         {
             try
             {
-                if (!validar("matricularOpe"))
+                if (!validar("loginusuario"))
                 {
                     return false;
                 }
                 clsUsuariosRN objRn = new clsUsuariosRN(this.strNombreApp);
 
                 objRn.NombreUsuario = strNombreUsuario;
-                objRn.Rol = strRol;
-                objRn.Identificacion = strIdentificacion;
+                objRn.Contrasena = strContrasena;
+                objRn.Rol = strRol;               
 
                 if (!objRn.realizarConex())
                 {
@@ -167,6 +130,16 @@ namespace libEscuelaOpe
                     objRn = null;
                     return false;
                 }
+
+                if (objRn.DatosRptaBd.Tables[0].Rows[0]["Respuesta"].ToString() == "1")
+                {
+                    strError = objRn.DatosRptaBd.Tables[0].Rows[0]["Mensaje"].ToString();
+                    objRn = null;
+                    return false;
+                }
+
+                strMensaje = objRn.DatosRptaBd.Tables[0].Rows[0]["Mensaje"].ToString();
+
                 objRn = null;
                 return true;
             }

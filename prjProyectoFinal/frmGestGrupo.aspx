@@ -25,8 +25,8 @@
                                     </div>
                                     <br />
                                     <div class="input-group">
-                                        <asp:Label ID="lblIdGrupo" runat="server" CssClass="input-group-addon" Text="ID Grupo"></asp:Label>
-                                        <asp:TextBox ID="txtIdGrupo" runat="server" CssClass="form-control" TextMode="Number" Enabled="false"></asp:TextBox>
+                                        <asp:Label ID="lblIdGrupo" runat="server" CssClass="input-group-addon" Text="Descripción Grupo"></asp:Label>
+                                        <asp:TextBox ID="txtDescripcionGrupo" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                                     </div>
                                     <br />
                                     <div class="input-group">
@@ -34,19 +34,23 @@
                                         <asp:DropDownList ID="ddlDeporte" runat="server" CssClass="form-control" Enabled="false">
                                         </asp:DropDownList>
                                     </div>
-                                    <br />
-                                    <div class="input-group">
-                                        <asp:Label ID="lblEscenarioDep" runat="server" CssClass="input-group-addon" Text="Escenario"></asp:Label>
-                                        <asp:DropDownList ID="cbxEscDep" runat="server" CssClass="form-control" Enabled="false">
-                                            <asp:ListItem>...Seleccione...</asp:ListItem>
-                                        </asp:DropDownList>
-                                    </div>
-                                    <br />
+                                    <br />                                  
                                     <div class="input-group">
                                         <asp:Label ID="lblProfesor" runat="server" CssClass="input-group-addon" Text="Profesor"></asp:Label>
                                         <asp:DropDownList ID="cbxProfesor" runat="server" CssClass="form-control" Enabled="false">
                                             <asp:ListItem>...Seleccione...</asp:ListItem>
                                         </asp:DropDownList>
+                                    </div>
+                                    <br />
+                                     <div class="input-group">
+                                        <asp:Label ID="lblDias" runat="server" CssClass="input-group-addon" Text="Dias"></asp:Label>
+                                        <asp:DropDownList ID="ddlDias" runat="server" CssClass="form-control" AutoPostBack="true" Enabled="false">
+                                            <asp:ListItem>...Seleccione...</asp:ListItem>
+                                            <asp:ListItem>Lunes  - Martes</asp:ListItem>
+                                            <asp:ListItem>Jueves - Viernes</asp:ListItem>
+                                            <asp:ListItem>Lunes  - Miercoles</asp:ListItem>
+                                            <asp:ListItem>Jueves - Sábados</asp:ListItem>                                           
+                                        </asp:DropDownList>                                       
                                     </div>
                                     <br />
                                     <div class="input-group">

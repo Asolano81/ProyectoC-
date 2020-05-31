@@ -17,7 +17,7 @@ namespace prjProyectoFinal
         #region "Metódos Privados"
         public void inhabilitarControles()
         {
-            txtIdMatricula.Enabled = false;
+            txtDias.Enabled = false;
             cbxDeporte.Enabled = false;
             cbxGrupo.Enabled = false;
             pnlRegistrar.Visible = false;
@@ -36,18 +36,19 @@ namespace prjProyectoFinal
                     inhabilitarControles();
                     break;
                 case 1:
-                    txtIdMatricula.Enabled = true;
+                    txtIdEstudiante.Enabled = true;
+                    txtDias.Enabled = true;
                     cbxDeporte.Enabled = true;
                     cbxGrupo.Enabled = true;
                     pnlRegistrar.Visible = true;
                     break;
                 case 2:
-                    txtIdMatricula.Enabled = true;
+                    txtIdEstudiante.Enabled = true;
                     cbxDeporte.Enabled = true;
                     pnlModificar.Visible = true;
                     break;
                 case 3:
-                    txtIdMatricula.Enabled = true;
+                    txtIdEstudiante.Enabled = true;
                     cbxDeporte.Enabled = true;
                     pnlEliminar.Visible = true;
                     break;

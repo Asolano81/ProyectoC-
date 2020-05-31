@@ -47,6 +47,7 @@ namespace libEscuelaRN
         public string Rol { get => strRol; set => strRol = value; }
         public string Error { get => strError; }
         public DataSet DatosRptaBd { get => dsDatos; }
+        public string Contrasena { get => strContrasena; set => strContrasena = value; }
         #endregion
 
         #region "Métodos Privados"
@@ -68,7 +69,7 @@ namespace libEscuelaRN
                     }
                     if (strContrasena == string.Empty)
                     {
-                        strError = "LÑa contraseña no puede estar vacia";
+                        strError = "La contraseña no puede estar vacia";
                         return false;
                     }
                     break;
@@ -76,24 +77,7 @@ namespace libEscuelaRN
             return true;
             
         }
-
-        private bool loginUsuario()
-        {
-            /*try
-            {
-                if (!validar("loginUsuario"))
-                {
-                    return false;
-                }                
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }*/
-
-            return true;
-        }
-
+         
         private bool agregarParam(string metodoOrigen)
         {
             try
@@ -107,8 +91,8 @@ namespace libEscuelaRN
                 {
                     case "realizarconex":
                         objDatosUsuario = new SqlParameter[3];
-                        objDatosUsuario[0] = new SqlParameter("@Identificacion", strIdentificacion);
-                        objDatosUsuario[1] = new SqlParameter("@Nombre", strNombreUsuario);
+                        objDatosUsuario[0] = new SqlParameter("@Nombre", strNombreUsuario);
+                        objDatosUsuario[1] = new SqlParameter("@contrasena", strContrasena);                        
                         objDatosUsuario[2] = new SqlParameter("@Rol", strRol);
                         break;
                 }

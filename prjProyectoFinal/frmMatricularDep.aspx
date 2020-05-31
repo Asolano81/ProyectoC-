@@ -22,11 +22,11 @@
                                             <asp:ListItem>Modificar</asp:ListItem>
                                             <asp:ListItem>Eliminar</asp:ListItem>
                                         </asp:DropDownList>
-                                    </div>
+                                    </div>                                   
                                     <br />
                                     <div class="input-group">
-                                        <asp:Label ID="lblIdMatricula" runat="server" CssClass="input-group-addon" Text="ID Matricula"></asp:Label>
-                                        <asp:TextBox ID="txtIdMatricula" runat="server" CssClass="form-control" TextMode="Number" Enabled="false"></asp:TextBox>
+                                        <asp:Label ID="lblIdEstudiante" runat="server" CssClass="input-group-addon" Text="Identificacion"></asp:Label>
+                                        <asp:TextBox ID="txtIdEstudiante" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                                     </div>
                                     <br />
                                     <div class="input-group">
@@ -41,6 +41,11 @@
                                         <asp:DropDownList ID="cbxGrupo" runat="server" CssClass="form-control" Enabled="false">
                                             <asp:ListItem>...Seleccione...</asp:ListItem>
                                         </asp:DropDownList>
+                                    </div>
+                                    <br />
+                                    <div class="input-group">
+                                        <asp:Label ID="lblDias" runat="server" CssClass="input-group-addon" Text="Días"></asp:Label>
+                                        <asp:TextBox ID="txtDias" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                                     </div>
                                     <br />
                                     <div class="input-group">

@@ -52,9 +52,9 @@ namespace prjProyectoFinal
         #region "Metódos Privados"
         public void inhabilitarControles()
         {
-            txtIdGrupo.Enabled = false;
+            txtDescripcionGrupo.Enabled = false;
             ddlDeporte.Enabled = false;
-            cbxEscDep.Enabled = false;
+            ddlDias.Enabled = false;
             cbxProfesor.Enabled = false;
             cbxHoraInicio.Enabled = false;
             pnlRegistrar.Visible = false;
@@ -110,19 +110,19 @@ namespace prjProyectoFinal
                     inhabilitarControles();
                     break;
                 case 1:
-                    txtIdGrupo.Enabled = true;
+                    txtDescripcionGrupo.Enabled = true;
                     ddlDeporte.Enabled = true;
-                    cbxEscDep.Enabled = true;
+                    ddlDias.Enabled = true;
                     cbxProfesor.Enabled = true;
                     cbxHoraInicio.Enabled = true;
                     pnlRegistrar.Visible = true;
                     break;
                 case 2:
-                    txtIdGrupo.Enabled = true;
+                    txtDescripcionGrupo.Enabled = true;
                     pnlModificar.Visible = true;
                     break;
                 case 3:
-                    txtIdGrupo.Enabled = true;
+                    txtDescripcionGrupo.Enabled = true;
                     pnlEliminar.Visible = true;
                     break;
                 default:

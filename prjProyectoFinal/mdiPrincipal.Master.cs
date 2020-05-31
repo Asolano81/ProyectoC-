@@ -24,19 +24,19 @@ namespace prjProyectoFinal
             {
                 strNombreAplica = Assembly.GetExecutingAssembly().GetName().Name + ".xml";
                 llenarDropDown(this.ddlRol);
-                clsUsuariosOPE objConsEst = new clsUsuariosOPE(strNombreAplica);
-                if (consultarConexion(objConsEst))
+                clsUsuariosOPE objUsuario = new clsUsuariosOPE(strNombreAplica);
+                if (consultarConexion(objUsuario))
                 {
-                    if (!objConsEst.Identificacion.Equals(string.Empty))
+                    if (!objUsuario.Contrasena.Equals(string.Empty))
                     {
-                        lblUserConex.Text = "Conectado: " + objConsEst.Nombre;
+                        lblUserConex.Text = "Conectado: " + objUsuario.Nombre;
                         mnuPpal.Items.RemoveAt(0);
                         pnlLogin.Visible = false;
                         if (Request.RawUrl.ToString().Equals("/frmLogin.aspx"))
                         {
                             pnlInicio.Visible = true;
                         } 
-                        llenarMenu(objConsEst.Rol);
+                        llenarMenu(objUsuario.Rol);
                         mnuPpal.Orientation = Orientation.Horizontal;
                     }
                 }
@@ -46,13 +46,8 @@ namespace prjProyectoFinal
         #region "Métodos Privados"
         private void mostrarMsj(string mensaje)
         {
-            this.lblUsuario.Text = mensaje;
-            if (mensaje == string.Empty)
-            {
-                this.lblUsuario.Visible = false;
-                return;
-            }
-            this.lblUsuario.Visible = true;
+            this.lblMensajeErrorLogin.Text = mensaje;
+            this.pnlMensaje.Visible = true;
         }
 
         private void llenarDropDown(DropDownList ddlDrop)
@@ -61,7 +56,7 @@ namespace prjProyectoFinal
             {
                 clsRolesOPE objOpe = new clsRolesOPE(strNombreAplica);
 
-                //limpiar(ddlDrop.ID);
+          
                 objOpe.DdlGen = ddlDrop;
 
                 if (!objOpe.llenarDrop())
@@ -110,8 +105,8 @@ namespace prjProyectoFinal
             MenuItem ConsHor = new MenuItem("Consultar mis horarios-(EN CONSTRUCCIÓN)", "opcConsHor");
             MenuItem mnuDirector = new MenuItem("Directores", "opcDirectores");
             MenuItem Gestionar = new MenuItem("Gestionar", "opcGestionar");
-            MenuItem Usuarios = new MenuItem("Usuarios", "opcGestionar");
-            MenuItem Grupos = new MenuItem("Grupos", "opcGestionar");
+            MenuItem Usuarios = new MenuItem("Usuarios", "opcUsuarios");
+            MenuItem Grupos = new MenuItem("Grupos", "opcGrupos");
             MenuItem mnuInformes = new MenuItem("Informes", "opcInformes");
             mnuPadre.ChildItems.Add(GestionarHijos);
             mnuPadre.ChildItems.Add(AproRecMatri);
@@ -149,19 +144,20 @@ namespace prjProyectoFinal
         {
             try
             {
-                clsUsuariosOPE objMatri = new clsUsuariosOPE(strNombreAplica);
+                clsUsuariosOPE objUsuario = new clsUsuariosOPE(strNombreAplica);
 
-                objMatri.NombreUsuario = this.txtUsuario.Text.Trim();
-                objMatri.Identificacion = this.txtContraseña.Text.Trim();
-                objMatri.Rol = ddlRol.SelectedItem.Text;
+                objUsuario.NombreUsuario = this.txtUsuario.Text.Trim();
+                objUsuario.Contrasena = this.txtContraseña.Text.Trim();
+                objUsuario.Rol = ddlRol.SelectedItem.Text;
+                
 
-                if (!objMatri.realizarConex())
+                if (!objUsuario.realizarConex())
                 {
-                    mostrarMsj(objMatri.Error);
-                    objMatri = null;
+                    mostrarMsj(objUsuario.Error);
+                    objUsuario = null;
                     return;
                 }
-                objMatri = null;
+                objUsuario = null;
 
                 Response.Redirect(Request.Url.ToString());
             }

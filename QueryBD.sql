@@ -33,18 +33,17 @@ descripcion varchar(50) not null,
 
 
 create table deportes(
-id int primary key not null,
+id int primary key identity not null,
 descripcion varchar(50)
 );
 
 
 create table grupos(
 id int primary key identity not null,
-descripcion_grupo varchar(100),
-hora_inicio time,
-hora_fin time,
-fecha_inicio date,
-fecha_finalizacion date,
+descripcion_grupo varchar(100) not null,
+hora_inicio varchar(50) not null,
+hora_fin varchar(50) not null,
+dia varchar(50) not null,
 deporte_id int not null,
 profesor_id int not null
 constraint fk_matricula_profesor foreign key(profesor_id) references usuarios(id),
@@ -53,7 +52,7 @@ constraint fk_deporte_grupo  foreign key(deporte_id) references deportes(id)
 
 create table escenarios(
 id int primary key identity not null,
-descripcion_escenarios varchar(100),
+descripcion_escenarios varchar(100) not null,
 deporte_id int not null,
 deporte_tipo_id int not null,
 constraint fk_deporte_tipo  foreign key(deporte_tipo_id) references deporte_tipo(id),
@@ -62,12 +61,17 @@ constraint fk_deporte_escenario  foreign key(deporte_id) references deportes(id)
 
 create table matriculas(
 id int primary key identity not null,
-fecha date,
+fecha varchar(50),
 aprobada bit,
-grupo_id int not null,
 estudiante_id int not null,
-constraint fk_matricula_usuario  foreign key(estudiante_id) references usuarios(id),
-constraint fk_matricula_grupo  foreign key(grupo_id) references grupos(id)
+constraint fk_matricula_usuario  foreign key(estudiante_id) references usuarios(id)
+);
+
+create table deporte_matricula(
+deporte_id int not null,
+matricula_id int not null,
+constraint fk_matricula_deporte  foreign key(deporte_id) references deportes(id),
+constraint fk_matricula_matriculas  foreign key(matricula_id) references matriculas(id)
 );
 
 create table permisos(
@@ -90,39 +94,50 @@ constraint fk_calificacion_matricula  foreign key(matricula_id) references matri
 );
 
 create table conexion(
-identificacion varchar(50) primary key not null,
 nombre varchar(50) not null,
-rol varchar(50) not null,
+contrasena varchar(50) not null,
+rol varchar(50) not null
 );
 
 
 /*Datos Semilla*/
 
-/*Usuarios*/
+/*Insert Usuarios*/
 INSERT INTO usuarios values('alex','alex@gmail.com','123','1010548720','Alexander','Carrillo','1984-10-10','2127214',null);/*Director*/
 INSERT INTO usuarios values('alejo','alejo@gmail.com','456','8128238','Alejandro','Solano','1984-06-21','2337479',null);/*Padre*/
 INSERT INTO usuarios values('jesus','jesus@gmail.com','789','40796262','Jesus','Munera','1984-06-21','2747895',null);/*Profesor*/
 INSERT INTO usuarios values('estiven','estiven@gmail.com','91011','324587','Estiven','Usme','1984-06-21','3245871',2);/*Hijo*/
 
-/*Roles*/
+/* Insert Roles*/
 INSERT INTO roles values('Director');
 INSERT INTO roles values('Padre');
 INSERT INTO roles values('Profesor');
 INSERT INTO roles values('Estudiante');
 
-/*Roles Usuario*/
+/*Insert Roles Usuario*/
 INSERT INTO rol_usuario values(1,1);
 INSERT INTO rol_usuario values(2,2);
 INSERT INTO rol_usuario values(3,3);
 INSERT INTO rol_usuario values(4,4);
 
+
+/* Insert Deportes*/
+INSERT INTO deportes values('Futbol');
+INSERT INTO deportes values('Baloncesto');
+INSERT INTO deportes values('Voleibol');
+INSERT INTO deportes values('Ajedrez');
+
+
 /*Stores Procedure*/
 
+/*Consultar Roles*/
 CREATE PROCEDURE SP_ConsultarRoles
 AS
 	SELECT id,descripcion FROM roles		
 GO;
 
+
+/*Consultar Combo Grupo*/
 CREATE PROCEDURE [dbo].[SP_ConsultarComboGrupos]
 @TipoConsulta VARCHAR(100)
 AS
@@ -135,17 +150,39 @@ BEGIN
 END
 
 
-CREATE PROCEDURE [dbo].[SP_Consultar] AS	
+/*Consulta Conexion*/
+
+CREATE PROCEDURE [dbo].[SP_ConsultarConexion] AS	
 		SELECT * FROM conexion
 GO
 
+
+/*Realizar Conexion con validacion de usuarios*/
+
 CREATE PROCEDURE [dbo].[SP_RealizarConexion]
-@Identificacion VARCHAR(20),
 @Nombre VARCHAR(50),
+@contrasena VARCHAR(20),
 @Rol VARCHAR(20)
 AS
-BEGIN
-	INSERT INTO conexion(identificacion, nombre, rol)
-			VALUES(@Identificacion,	@Nombre, @Rol)
-END
+	BEGIN		
+		IF EXISTS(select us.nombre_usuario,us.contrasena,ro.id as idRol,ro.descripcion 
+					  from usuarios as us 
+					  join rol_usuario as rs on rs.usuario_id = us.id 
+					  join roles as ro on ro.id = rs.rol_id
+					  WHERE nombre_usuario = @Nombre AND contrasena = @contrasena AND ro.descripcion = @Rol)
+		BEGIN
+			INSERT INTO conexion(nombre, contrasena, rol)values(@Nombre,@contrasena,@Rol)
+
+			SELECT '0' AS respuesta,
+				'Usuario conectado' AS Mensaje
+
+			RETURN
+		END
+		
+		SELECT '1' AS Respuesta,
+		   'Datos incorrectos por favor validar registro' AS Mensaje		
+	END
 GO
+
+
+
