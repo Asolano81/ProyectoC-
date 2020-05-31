@@ -40,9 +40,10 @@ namespace libEscuelaOpe
         #endregion
 
         #region "Propiedades"
-        public string Nombre { get => strNombre; }
-        public string Rol { get => strRol; }
-        public string Identificacion { get => strIdentificacion; }
+        public string Nombre { get => strNombre; set => strNombre = value; }
+        public string NombreUsuario { get => strNombreUsuario; set => strNombreUsuario = value; }
+        public string Rol { get => strRol; set => strRol = value; }
+        public string Identificacion { get => strIdentificacion; set => strIdentificacion = value; }
         public string Error { get => strError; }
         #endregion
 
@@ -142,6 +143,35 @@ namespace libEscuelaOpe
             catch (Exception ex)
             {
 
+                throw ex;
+            }
+        }
+
+        public bool realizarConex()
+        {
+            try
+            {
+                if (!validar("matricularOpe"))
+                {
+                    return false;
+                }
+                clsUsuariosRN objRn = new clsUsuariosRN(this.strNombreApp);
+
+                objRn.NombreUsuario = strNombreUsuario;
+                objRn.Rol = strRol;
+                objRn.Identificacion = strIdentificacion;
+
+                if (!objRn.realizarConex())
+                {
+                    strError = objRn.Error;
+                    objRn = null;
+                    return false;
+                }
+                objRn = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
         }

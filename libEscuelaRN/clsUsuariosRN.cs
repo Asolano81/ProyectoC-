@@ -18,6 +18,7 @@ namespace libEscuelaRN
         private string strContrasena;
         private string strIdentificacion;
         private string strNombre;
+        private string strRol;
         private string strApellido;
         private string strFechaNacimiento;
         private string strTelefono;
@@ -41,9 +42,10 @@ namespace libEscuelaRN
         #endregion
 
         #region "Propiedades"        
-        public string NombreUsuario { set => strNombreUsuario = value; }
-        public string Contrasena { set => strContrasena = value; }
-        public int IntIdUsuario { get => intIdUsuario; set => intIdUsuario = value; }
+        public string NombreUsuario { get => strNombreUsuario; set => strNombreUsuario = value; }
+        public string Identificacion { get => strIdentificacion; set => strIdentificacion = value; }
+        public string Rol { get => strRol; set => strRol = value; }
+        public string Error { get => strError; }
         public DataSet DatosRptaBd { get => dsDatos; }
         #endregion
 
@@ -90,9 +92,34 @@ namespace libEscuelaRN
             }*/
 
             return true;
-        }    
+        }
 
+        private bool agregarParam(string metodoOrigen)
+        {
+            try
+            {
+                if (!validar(metodoOrigen))
+                {
+                    return false;
+                }
 
+                switch (metodoOrigen.ToLower())
+                {
+                    case "realizarconex":
+                        objDatosUsuario = new SqlParameter[3];
+                        objDatosUsuario[0] = new SqlParameter("@Identificacion", strIdentificacion);
+                        objDatosUsuario[1] = new SqlParameter("@Nombre", strNombreUsuario);
+                        objDatosUsuario[2] = new SqlParameter("@Rol", strRol);
+                        break;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
 
         #endregion
 
@@ -157,6 +184,38 @@ namespace libEscuelaRN
                 dsDatos = objCnx.DataSetLleno;
                 objCnx.cerrarCnx();
                 objCnx = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public bool realizarConex()
+        {
+            try
+            {
+                if (!agregarParam("realizarConex"))
+                {
+                    return false;
+                }
+
+                objConex = new clsConexionBd(strNombreApp);
+                objConex.SQL = "[SP_RealizarConexion]";
+                objConex.ParametrosSQL = objDatosUsuario;
+
+                if (!objConex.llenarDataSet(true, true))
+                {
+                    strError = objConex.Error;
+                    objConex.cerrarCnx();
+                    objConex = null;
+                    return false;
+                }
+                dsDatos = objConex.DataSetLleno;
+                objConex.cerrarCnx();
+                objConex = null;
                 return true;
             }
             catch (Exception ex)

@@ -28,12 +28,18 @@ namespace prjProyectoFinal
                     {
                         lblUserConex.Text = "Conectado: " + objConsEst.Nombre;
                         mnuPpal.Items.RemoveAt(0);
-                        pnlGeneral.Visible = false;
+                        pnlLogin.Visible = false;
+                        if (Request.RawUrl.ToString().Equals("/frmLogin.aspx"))
+                        {
+                            pnlInicio.Visible = true;
+                        } 
                         llenarMenu(objConsEst.Rol);
-                    }  
-                }            
-            }     
+                        mnuPpal.Orientation = Orientation.Horizontal;
+                    }
+                }
+            }
         }
+
         #region "Métodos Privados"
         private void mostrarMsj(string mensaje)
         {
@@ -72,8 +78,6 @@ namespace prjProyectoFinal
         {
             try
             {
-                if (mnuPpal.Items.Count <= 6)
-                {
                     if (!objConsEst.consConex())
                     {
                         lblUserConex.Text = objConsEst.Error;
@@ -81,8 +85,6 @@ namespace prjProyectoFinal
                         return false;
                     }
                     return true;
-                }
-                return false;
             }
             catch (Exception ex)
             {
@@ -94,21 +96,19 @@ namespace prjProyectoFinal
 
         private void llenarMenu(string rol)
         {
-            MenuItem mnuInicio = new MenuItem("Inicio", "opcInicio", "", "~/frmPrincipal.aspx");
-            mnuPpal.Items.AddAt(0, mnuInicio);
             MenuItem mnuPadre = new MenuItem("Padres", "opcPadres");
             MenuItem AproRecMatri = new MenuItem("Aprobar/Rechazar-Matricula-(EN CONSTRUCCIÓN)", "opcAproRechMtr");
-            MenuItem GestionarHijos = new MenuItem("Gestionar Hijos", "opcGestHijos", "", "~/frmGestHijo.aspx");
+            MenuItem GestionarHijos = new MenuItem("Gestionar Hijos", "opcGestHijos");
             MenuItem mnuProfesor = new MenuItem("Profesores", "opcProfesor");
             MenuItem ConsDep = new MenuItem("Consultar mis deportes-(EN CONSTRUCCIÓN)", "opcConsDep");
             MenuItem ConsGrup = new MenuItem("Consultar mis grupos-(EN CONSTRUCCIÓN)", "opcConsGrup");
             MenuItem mnuEstudiante = new MenuItem("Estudiantes", "opcEstudiante");
-            MenuItem MatrDep = new MenuItem("Matricular Deportes", "opcMatrDep", "", "~/frmMatricularDep.aspx");
+            MenuItem MatrDep = new MenuItem("Matricular Deportes", "opcMatrDep");
             MenuItem ConsHor = new MenuItem("Consultar mis horarios-(EN CONSTRUCCIÓN)", "opcConsHor");
             MenuItem mnuDirector = new MenuItem("Directores", "opcDirectores");
             MenuItem Gestionar = new MenuItem("Gestionar", "opcGestionar");
-            MenuItem Usuarios = new MenuItem("Usuarios", "opcGestionar", "", "~/frmGestUsuario.aspx");
-            MenuItem Grupos = new MenuItem("Grupos", "opcGestionar", "", "~/frmGestGrupo.aspx");
+            MenuItem Usuarios = new MenuItem("Usuarios", "opcGestionar");
+            MenuItem Grupos = new MenuItem("Grupos", "opcGestionar");
             MenuItem mnuInformes = new MenuItem("Informes", "opcInformes");
             mnuPadre.ChildItems.Add(GestionarHijos);
             mnuPadre.ChildItems.Add(AproRecMatri);
@@ -122,38 +122,81 @@ namespace prjProyectoFinal
             switch (rol)
             {
                 case "Padre":
-                    mnuPpal.Items.AddAt(1, mnuPadre);
+                    mnuPpal.Items.AddAt(0, mnuPadre);
                     break;
                 case "Profesor":   
-                    mnuPpal.Items.AddAt(1, mnuProfesor);
+                    mnuPpal.Items.AddAt(0, mnuProfesor);
                     break;
                 case "Estudiante":          
-                    mnuPpal.Items.AddAt(1, mnuEstudiante);                    
+                    mnuPpal.Items.AddAt(0, mnuEstudiante);                    
                     break;
                 case "Director":
-                    mnuPpal.Items.AddAt(1, mnuDirector);
-                    mnuPpal.Items.AddAt(2, mnuPadre);
-                    mnuPpal.Items.AddAt(3, mnuProfesor);
-                    mnuPpal.Items.AddAt(4, mnuEstudiante);
-                    mnuPpal.Items.AddAt(5, mnuInformes); 
+                    mnuPpal.Items.AddAt(0, mnuDirector);
+                    mnuPpal.Items.AddAt(1, mnuPadre);
+                    mnuPpal.Items.AddAt(2, mnuProfesor);
+                    mnuPpal.Items.AddAt(3, mnuEstudiante);
+                    mnuPpal.Items.AddAt(4, mnuInformes); 
                     break;
                 default:
                     break;
             } 
         }
+
+        private void realizarConexion()
+        {
+            try
+            {
+                clsUsuariosOPE objMatri = new clsUsuariosOPE(strNombreAplica);
+
+                objMatri.NombreUsuario = this.txtUsuario.Text.Trim();
+                objMatri.Identificacion = this.txtContraseña.Text.Trim();
+                objMatri.Rol = ddlRol.SelectedItem.Text;
+
+                if (!objMatri.realizarConex())
+                {
+                    mostrarMsj(objMatri.Error);
+                    objMatri = null;
+                    return;
+                }
+                objMatri = null;
+
+                Response.Redirect(Request.Url.ToString());
+            }
+            catch (Exception ex)
+            {
+                lblUserConex.Text = ex.Message;
+            }
+        }
+
         #endregion
 
         protected void btnIniciar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                
-            }
-            catch (Exception ex)
-            {
+            realizarConexion();
+        }
 
-                lblUserConex.Text = ex.Message;
+        protected void mnuPpal_MenuItemClick(object sender, MenuEventArgs e)
+        {
+            string op = e.Item.Text;
+
+            switch (op)
+            {
+                case "Gestionar Hijos":
+                    Response.Redirect("~/frmGestHijo.aspx"); 
+                    break;
+                case "Matricular Deportes":
+                    Response.Redirect("~/frmMatricularDep.aspx");
+                    break;
+                case "Usuarios":
+                    Response.Redirect("~/frmGestUsuario.aspx");
+                    break;
+                case "Grupos":
+                    Response.Redirect("~/frmGestGrupo.aspx");
+                    break;
+                default:
+                    break;
             }
+            
         }
     }
 }

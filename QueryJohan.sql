@@ -21,3 +21,15 @@ CREATE PROCEDURE [dbo].[SP_ConsultarConexion] AS
 	END
 GO
 
+CREATE PROCEDURE [dbo].[SP_RealizarConexion]
+@Identificacion VARCHAR(20),
+@Nombre VARCHAR(50),
+@Rol VARCHAR(20)
+AS
+BEGIN
+	INSERT INTO conexion(identificacion, nombre, rol)
+			VALUES(@Identificacion,	@Nombre, @Rol)
+END
+GO
+
+
