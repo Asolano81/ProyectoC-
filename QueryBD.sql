@@ -1,7 +1,7 @@
 create database escuela;
 use escuela;
 create table usuarios(
-id int primary key not null,
+id int primary key not null identity,
 nombre_usuario varchar(50) not null,
 email varchar(50) not null,
 contrasena varchar(50) not null,
@@ -15,7 +15,7 @@ constraint fk_padre  foreign key(padre_id) references usuarios(id)
 );
 
 create table roles(
-id int primary key not null,
+id int primary key identity not null,
 descripcion varchar(50) not null
 );
 
@@ -27,7 +27,7 @@ constraint fk_rol  foreign key(rol_id) references roles(id)
 );
 
 create table deporte_tipo(
-id int primary key not null,
+id int primary key identity not null,
 descripcion varchar(50) not null,
 );
 
@@ -39,7 +39,7 @@ descripcion varchar(50)
 
 
 create table grupos(
-id int primary key not null,
+id int primary key identity not null,
 descripcion_grupo varchar(100),
 hora_inicio time,
 hora_fin time,
@@ -52,7 +52,7 @@ constraint fk_deporte_grupo  foreign key(deporte_id) references deportes(id)
 );
 
 create table escenarios(
-id int primary key not null,
+id int primary key identity not null,
 descripcion_escenarios varchar(100),
 deporte_id int not null,
 deporte_tipo_id int not null,
@@ -61,7 +61,7 @@ constraint fk_deporte_escenario  foreign key(deporte_id) references deportes(id)
 );
 
 create table matriculas(
-id int primary key not null,
+id int primary key identity not null,
 fecha date,
 aprobada bit,
 grupo_id int not null,
@@ -71,7 +71,7 @@ constraint fk_matricula_grupo  foreign key(grupo_id) references grupos(id)
 );
 
 create table permisos(
-id int primary key not null,
+id int primary key identity not null,
 descripcion varchar(50) not null
 );
 
@@ -83,25 +83,32 @@ constraint fk_rol_permiso  foreign key(rol_id) references roles(id)
 );
 
 create table calificaciones(
-id int primary key not null,
+id int primary key identity not null,
 matricula_id int not null,
 nota decimal(20,0),
 constraint fk_calificacion_matricula  foreign key(matricula_id) references matriculas(id)
 );
 
+create table conexion(
+identificacion varchar(50) primary key not null,
+nombre varchar(50) not null,
+rol varchar(50) not null,
+);
+
+
 /*Datos Semilla*/
 
 /*Usuarios*/
-INSERT INTO usuarios values(1,'alex','alex@gmail.com','123','1010548720','Alexander','Carrillo','1984-10-10','2127214',null);/*Director*/
-INSERT INTO usuarios values(2,'alejo','alejo@gmail.com','456','8128238','Alejandro','Solano','1984-06-21','2337479',null);/*Padre*/
-INSERT INTO usuarios values(3,'jesus','jesus@gmail.com','789','40796262','Jesus','Munera','1984-06-21','2747895',null);/*Profesor*/
-INSERT INTO usuarios values(4,'estiven','estiven@gmail.com','91011','324587','Estiven','Usme','1984-06-21','3245871',2);/*Hijo*/
+INSERT INTO usuarios values('alex','alex@gmail.com','123','1010548720','Alexander','Carrillo','1984-10-10','2127214',null);/*Director*/
+INSERT INTO usuarios values('alejo','alejo@gmail.com','456','8128238','Alejandro','Solano','1984-06-21','2337479',null);/*Padre*/
+INSERT INTO usuarios values('jesus','jesus@gmail.com','789','40796262','Jesus','Munera','1984-06-21','2747895',null);/*Profesor*/
+INSERT INTO usuarios values('estiven','estiven@gmail.com','91011','324587','Estiven','Usme','1984-06-21','3245871',2);/*Hijo*/
 
 /*Roles*/
-INSERT INTO roles values(1,'Director');
-INSERT INTO roles values(2,'Padre');
-INSERT INTO roles values(3,'Profesor');
-INSERT INTO roles values(4,'Hijo');
+INSERT INTO roles values('Director');
+INSERT INTO roles values('Padre');
+INSERT INTO roles values('Profesor');
+INSERT INTO roles values('Estudiante');
 
 /*Roles Usuario*/
 INSERT INTO rol_usuario values(1,1);
@@ -109,15 +116,36 @@ INSERT INTO rol_usuario values(2,2);
 INSERT INTO rol_usuario values(3,3);
 INSERT INTO rol_usuario values(4,4);
 
-/*Consulta Join*/
-select usuarios.id,usuarios.nombre,roles.id as rolId,roles.descripcion from usuarios 
-join rol_usuario on rol_usuario.usuario_id = usuarios.id
-join roles on rol_usuario.rol_id = roles.id
-where usuario_id = 1
+/*Stores Procedure*/
 
+CREATE PROCEDURE SP_ConsultarRoles
+AS
+	SELECT id,descripcion FROM roles		
+GO;
 
-CREATE PROCEDURE [dbo].[SP_ConsultarRoles] AS
+CREATE PROCEDURE [dbo].[SP_ConsultarComboGrupos]
+@TipoConsulta VARCHAR(100)
+AS
+BEGIN
+	IF @TipoConsulta = 'DEPORTES'
 	BEGIN
-		SELECT id,descripcion FROM roles	
+		--Cursos
+		SELECT id,descripcion FROM deportes
 	END
+END
+
+
+CREATE PROCEDURE [dbo].[SP_Consultar] AS	
+		SELECT * FROM conexion
+GO
+
+CREATE PROCEDURE [dbo].[SP_RealizarConexion]
+@Identificacion VARCHAR(20),
+@Nombre VARCHAR(50),
+@Rol VARCHAR(20)
+AS
+BEGIN
+	INSERT INTO conexion(identificacion, nombre, rol)
+			VALUES(@Identificacion,	@Nombre, @Rol)
+END
 GO

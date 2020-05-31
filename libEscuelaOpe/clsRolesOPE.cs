@@ -1,6 +1,6 @@
-﻿using System;
+﻿using libEscuelaRN;
+using System;
 using System.Data;
-using libEscuelaRN;
 using System.Web.UI.WebControls;
 
 namespace libEscuelaOpe
@@ -46,7 +46,7 @@ namespace libEscuelaOpe
                 switch (DdlGen.ID.ToLower())
                 {
                     case "ddlRol":
-                        objRn.IdRol =intIdRol;
+                        objRn.IdRol = intIdRol;
                         objRn.Descripcion = strDescripcion;
                         break;
                 }

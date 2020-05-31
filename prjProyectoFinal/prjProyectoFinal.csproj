@@ -76,7 +76,6 @@
     <Content Include="frmGestUsuario.aspx" />
     <Content Include="frmLogin.aspx" />
     <Content Include="frmMatricularDep.aspx" />
-    <Content Include="frmPrincipal.aspx" />
     <Content Include="imagenes\Fondo.jpg" />
     <Content Include="imagenes\LogoAjedrez.jpg" />
     <Content Include="imagenes\LogoBadminton.jpg" />
@@ -130,13 +129,6 @@
     </Compile>
     <Compile Include="frmMatricularDep.aspx.designer.cs">
       <DependentUpon>frmMatricularDep.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="frmPrincipal.aspx.cs">
-      <DependentUpon>frmPrincipal.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="frmPrincipal.aspx.designer.cs">
-      <DependentUpon>frmPrincipal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="mdiPrincipal.Master.cs">
