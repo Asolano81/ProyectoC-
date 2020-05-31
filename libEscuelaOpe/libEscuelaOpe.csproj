@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsGruposOPE.cs" />
     <Compile Include="clsRolesOPE.cs" />
     <Compile Include="clsUsuariosOPE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

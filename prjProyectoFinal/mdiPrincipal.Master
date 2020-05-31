@@ -35,31 +35,13 @@
                             <div class="col-md-8">
                                 <div class="navbar navbar-default">
                                     <div class="collapse navbar-collapse" id="navbarPpal">
+<<<<<<< HEAD
                                         <asp:Menu ID="mnuPpal" runat="server" Orientation="Horizontal" RenderingMode="List" IncludeStyleBlock="false" StaticMenuStyle-CssClass="nav navbar-nav" DynamicMenuStyle-CssClass="dropdown-menu hide">
+=======
+                                        <asp:Menu ID="mnuPpal" runat="server" OrienopcDirectorestation="Horizontal" RenderingMode="List" IncludeStyleBlock="false" StaticMenuStyle-CssClass="nav navbar-nav" DynamicMenuStyle-CssClass="dropdown-menu" OnMenuItemClick="mnuPpal_MenuItemClick">
+>>>>>>> 19a9ad756a9a13ead81c9792a04f9a874fdc773a
                                             <Items>
-                                                <asp:MenuItem Text="Inicio" Value="opcInicio" NavigateUrl="~/frmPrincipal.aspx"></asp:MenuItem>
-                                                <asp:MenuItem Text="Ingresar" Value="opcIngresar">
-                                                    <asp:MenuItem NavigateUrl="~/frmLogin.aspx" Text="Iniciar sesión" Value="opcMatriculas"></asp:MenuItem>
-                                                </asp:MenuItem>
-                                                <asp:MenuItem Text="Padres" Value="opcPadres">
-                                                    <asp:MenuItem NavigateUrl="~/frmGestHijo.aspx" Text="Gestionar Hijos" Value="opcGestHijos"></asp:MenuItem>
-                                                    <asp:MenuItem NavigateUrl="" Text="Aprobar/Rechazar-Matricula-(EN CONSTRUCCIÓN)" Value="opcAproRechMtr"></asp:MenuItem>
-                                                </asp:MenuItem>
-                                                <asp:MenuItem Text="Profesores" Value="opcProfesores">
-                                                    <asp:MenuItem NavigateUrl="" Text="Consultar mis deportes-(EN CONSTRUCCIÓN)" Value="opcConsDep"></asp:MenuItem>
-                                                    <asp:MenuItem NavigateUrl="" Text="Consultar mis grupos-(EN CONSTRUCCIÓN)" Value="opcConsGrup"></asp:MenuItem>
-                                                </asp:MenuItem>
-                                                <asp:MenuItem Text="Estudiantes" Value="opcEstudiantes">
-                                                    <asp:MenuItem NavigateUrl="~/frmMatricularDep.aspx" Text="Matricular Deportes" Value="opcMatrDep"></asp:MenuItem>
-                                                    <asp:MenuItem NavigateUrl="" Text="Consultar mis horarios-(EN CONSTRUCCIÓN)" Value="opcConsHor"></asp:MenuItem>
-                                                </asp:MenuItem>
-                                                <asp:MenuItem Text="Directores" Value="opcDirectores">
-                                                    <asp:MenuItem Text="Gestionar" Value="opcGestionar">
-                                                        <asp:MenuItem NavigateUrl="~/frmGestUsuario.aspx" Text="Usuarios" Value="opcUsuario"></asp:MenuItem>
-                                                        <asp:MenuItem NavigateUrl="~/frmGestGrupo.aspx" Text="Grupos" Value="opcGrupo"></asp:MenuItem>
-                                                    </asp:MenuItem>
-                                                </asp:MenuItem>
-                                                <asp:MenuItem Text="Informes" Value="opcInformes"></asp:MenuItem>
+                                                <asp:MenuItem NavigateUrl="~/frmLogin.aspx" Text="Iniciar" Value="opcIngresar"></asp:MenuItem>
                                             </Items>
                                         </asp:Menu>
                                     </div>
@@ -73,6 +55,110 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <asp:Panel ID="pnlLogin" runat="server" Visible="true">
+                                <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <br />
+                                    <br />
+                                    <div class="panel-body Centrar-Medio">
+                                        <div class="col-md-4">
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">
+                                                    <h1 class="panel-title">Iniciar sesión</h1>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="container-fluid text-center">
+                                                        <div class="input-group">
+                                                            <asp:Label ID="lblUsuario" runat="server" CssClass="input-group-addon" Text="Usuario"></asp:Label>
+                                                            <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control"></asp:TextBox>
+                                                        </div>
+                                                        <br />
+                                                        <div class="input-group">
+                                                            <asp:Label ID="lblContraseña" runat="server" CssClass="input-group-addon" Text="Contraseña"></asp:Label>
+                                                            <asp:TextBox ID="txtContraseña" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                                        </div>
+                                                        <br />
+                                                        <div class="input-group">
+                                                            <asp:Label ID="lblRol" runat="server" CssClass="input-group-addon" Text="Rol de Aceeso"></asp:Label>
+                                                            <asp:DropDownList ID="ddlRol" runat="server" CssClass="form-control">
+                                                            </asp:DropDownList>
+                                                        </div>
+                                                        <br />
+                                                        <asp:Button ID="btnIniciar" runat="server" CssClass="btn btn-success" Text="Iniciar" OnClick="btnIniciar_Click" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                </div>
+                            </div>
+                            </asp:Panel>
+                        </div>
+                        
+                            <asp:Panel ID="pnlInicio" runat="server" Visible="false">
+                                <div class="row Centrar-Medio">
+                                    <asp:Label ID="lblTituloInicio" runat="server" CssClass="h3" Text="Ofrecemos la mayor calidad en nuestros centros deportivos y tenemos pasantias internacionales"></asp:Label>
+                                </div>
+                                <br />
+                                <div class="row Centrar-Medio">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="container-fluid text-center">
+                                                    <div class="row Centrar-Medio">
+                                                        <div class="col-md-4 Centrar-Medio">
+                                                            <asp:Image ID="imgFutbol" runat="server" CssClass="img-responsive" ImageUrl="~/imagenes/LogoFutbol.jpg" Height="130px" Width="130px" />
+                                                        </div>
+                                                        <div class="col-md-4 Centrar-Medio">
+                                                            <asp:Image ID="imgBassketball" runat="server" CssClass="img-responsive" ImageUrl="~/imagenes/LogoBasketball.jpg" Height="130px" Width="130px" />
+                                                        </div>
+                                                        <div class="col-md-4 Centrar-Medio">
+                                                            <asp:Image ID="imgNatacion" runat="server" CssClass="img-responsive" ImageUrl="~/imagenes/LogoNatacion.jpg" Height="130px" Width="130px" />
+                                                        </div>
+                                                        <div class="col-md-4 Centrar-Medio">
+                                                            <asp:Image ID="imgRugby" runat="server" CssClass="img-responsive" ImageUrl="~/imagenes/LogoRugby.jpg" Height="130px" Width="130px" />
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="row Centrar-Medio">
+                                                        <div class="col-md-4 Centrar-Medio">
+                                                            <asp:Image ID="imgAjedrez" runat="server" CssClass="img-responsive" ImageUrl="~/imagenes/LogoAjedrez.jpg" Height="130px" Width="130px" />
+                                                        </div>
+                                                        <div class="col-md-4 Centrar-Medio">
+                                                            <asp:Image ID="imgBadminton" runat="server" CssClass="img-responsive" ImageUrl="~/imagenes/LogoBadminton.jpg" Height="130px" Width="130px" />
+                                                        </div>
+                                                        <div class="col-md-4 Centrar-Medio">
+                                                            <asp:Image ID="imgCiclismo" runat="server" CssClass="img-responsive" ImageUrl="~/imagenes/LogoCiclismo.jpg" Height="130px" Width="130px" />
+                                                        </div>
+                                                        <div class="col-md-4 Centrar-Medio">
+                                                            <asp:Image ID="imgTennis" runat="server" CssClass="img-responsive" ImageUrl="~/imagenes/LogoTennis.jpg" Height="130px" Width="130px" />
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="row Centrar-Medio">
+                                                        <div class="col-md-4 Centrar-Medio">
+                                                            <asp:Image ID="imgPatinaje" runat="server" CssClass="img-responsive" ImageUrl="~/imagenes/LogoPatinaje.jpg" Height="130px" Width="130px" />
+                                                        </div>
+                                                        <div class="col-md-4 Centrar-Medio">
+                                                            <asp:Image ID="imgTennisMesa" runat="server" CssClass="img-responsive" ImageUrl="~/imagenes/LogoTennisMesa.jpg" Height="130px" Width="130px" />
+                                                        </div>
+                                                        <div class="col-md-4 Centrar-Medio">
+                                                            <asp:Image ID="imgEsgrima" runat="server" CssClass="img-responsive" ImageUrl="~/imagenes/LogoEsgrima.jpg" Height="130px" Width="130px" />
+                                                        </div>
+                                                        <div class="col-md-4 Centrar-Medio">
+                                                            <asp:Image ID="imgVolleyball" runat="server" CssClass="img-responsive" ImageUrl="~/imagenes/LogoVolleyball.jpg" Height="130px" Width="130px" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </asp:Panel>
+                        
                         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                             <h2>Páginas Hijas</h2>
                         </asp:ContentPlaceHolder>

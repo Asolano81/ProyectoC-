@@ -31,8 +31,7 @@
                                     <br />
                                     <div class="input-group">
                                         <asp:Label ID="lblDeporte" runat="server" CssClass="input-group-addon" Text="Deporte"></asp:Label>
-                                        <asp:DropDownList ID="cbxDeporte" runat="server" CssClass="form-control" Enabled="false">
-                                            <asp:ListItem>...Seleccione...</asp:ListItem>
+                                        <asp:DropDownList ID="ddlDeporte" runat="server" CssClass="form-control" Enabled="false">
                                         </asp:DropDownList>
                                     </div>
                                     <br />

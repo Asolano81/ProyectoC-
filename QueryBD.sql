@@ -101,7 +101,7 @@ INSERT INTO usuarios values(4,'estiven','estiven@gmail.com','91011','324587','Es
 INSERT INTO roles values(1,'Director');
 INSERT INTO roles values(2,'Padre');
 INSERT INTO roles values(3,'Profesor');
-INSERT INTO roles values(4,'Hijo');
+INSERT INTO roles values(4,'Estudiante');
 
 /*Roles Usuario*/
 INSERT INTO rol_usuario values(1,1);
@@ -115,9 +115,43 @@ join rol_usuario on rol_usuario.usuario_id = usuarios.id
 join roles on rol_usuario.rol_id = roles.id
 where usuario_id = 1
 
-
 CREATE PROCEDURE [dbo].[SP_ConsultarRoles] AS
 	BEGIN
 		SELECT id,descripcion FROM roles	
 	END
+GO
+
+/*JOHAN*/
+CREATE PROCEDURE [dbo].[SP_ConsultarComboGrupos]
+@TipoConsulta VARCHAR(100)
+AS
+BEGIN
+	IF @TipoConsulta = 'DEPORTES'
+	BEGIN
+		--Cursos
+		SELECT id,descripcion FROM deportes
+	END
+END
+
+create table conexion(
+identificacion varchar(50) primary key not null,
+nombre varchar(50) not null,
+rol varchar(50) not null,
+);
+
+CREATE PROCEDURE [dbo].[SP_Consultar] AS
+	BEGIN
+		SELECT * FROM conexion
+	ENDConexion
+GO
+
+CREATE PROCEDURE [dbo].[SP_RealizarConexion]
+@Identificacion VARCHAR(20),
+@Nombre VARCHAR(50),
+@Rol VARCHAR(20)
+AS
+BEGIN
+	INSERT INTO conexion(identificacion, nombre, rol)
+			VALUES(@Identificacion,	@Nombre, @Rol)
+END
 GO
