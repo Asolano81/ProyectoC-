@@ -10,15 +10,10 @@ using System.Web.UI.WebControls;
 namespace prjProyectoFinal
 {
     public partial class Site1 : System.Web.UI.MasterPage
-<<<<<<< HEAD
-    {   
-        
-        protected void Page_Load(object sender, EventArgs e)
-        {
-           
 
-=======
-    {
+    {   
+    
+    
         #region "Variables Globales"
         private static string strNombreAplica;
         #endregion
@@ -205,7 +200,7 @@ namespace prjProyectoFinal
                     break;
             }
             
->>>>>>> 19a9ad756a9a13ead81c9792a04f9a874fdc773a
+
         }
     }
 }

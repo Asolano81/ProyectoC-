@@ -69,9 +69,9 @@ namespace prjProyectoFinal
         protected global::System.Web.UI.WebControls.Label lblUserConex;
 
         /// <summary>
-<<<<<<< HEAD
+
         /// ContentPlaceHolder1 control.
-=======
+
         /// Control pnlLogin.
         /// </summary>
         /// <remarks>
@@ -271,7 +271,7 @@ namespace prjProyectoFinal
         
         /// <summary>
         /// Control ContentPlaceHolder1.
->>>>>>> 19a9ad756a9a13ead81c9792a04f9a874fdc773a
+
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
