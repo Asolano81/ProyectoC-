@@ -27,6 +27,7 @@ namespace libEscuelaOpe
 
         }
         #endregion
+
         #region "Propiedades"
         public int IdRol { get => intIdRol; set => intIdRol = value; }
         public string Descripcion { get => strDescripcion; set => strDescripcion = value; }
@@ -41,7 +42,6 @@ namespace libEscuelaOpe
         {
             try
             {
-
                 clsRolesRN objRn = new clsRolesRN(strNombreApp);
                 switch (DdlGen.ID.ToLower())
                 {
@@ -50,7 +50,6 @@ namespace libEscuelaOpe
                         objRn.Descripcion = strDescripcion;
                         break;
                 }
-
 
                 if (!objRn.llenarDropDowns(DdlGen))
                 {
