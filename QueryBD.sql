@@ -146,14 +146,16 @@ BEGIN
 	BEGIN
 		--Deportes
 		SELECT id,descripcion FROM deportes
+		RETURN
 	END
-	ELSE IF @TipoConsulta = 'PROFESORES' 
-	BEGIN
-		--Profesores
-		SELECT DISTINCT usuarios.id AS id, nombre AS nom_profesor, rol_id as ROL
-		FROM usuarios INNER JOIN rol_usuario ON usuarios.id = rol_usuario.usuario_id
-		WHERE rol_usuario.rol_id = 3
-	END
+	
+	IF @TipoConsulta = 'PROFESORES' 
+		BEGIN
+			--Profesores
+			SELECT DISTINCT usuarios.id AS id, nombre AS nom_profesor, rol_id as ROL
+			FROM usuarios INNER JOIN rol_usuario ON usuarios.id = rol_usuario.usuario_id
+			WHERE rol_usuario.rol_id = 3
+		END
 END
 
 /*Consulta Conexion*/
@@ -231,6 +233,27 @@ AS
 GO
 
 
+
+
+
+/*Consultar Grupo*/
+CREATE PROCEDURE [dbo].[SP_ConsultarGrupo] 
+@Descripcion VARCHAR(20)
+AS
+BEGIN
+		SELECT * FROM grupos
+		WHERE descripcion_grupo = @Descripcion
+END
+GO
+
+/*Cargar Grupo*/
+CREATE PROCEDURE [dbo].[SP_CargarGrupos] AS	
+		SELECT grupos.descripcion_grupo AS Descripcion, grupos.hora_inicio AS Hora_Inicio, grupos.hora_fin AS Hora_Fin, grupos.dia AS Dia, deportes.descripcion as Deporte, usuarios.nombre AS Profesor
+		FROM grupos INNER JOIN deportes ON grupos.deporte_id = deportes.id
+		INNER JOIN usuarios ON usuarios.id = profesor_id
+GO
+
+/*Crear Grupo*/
 CREATE PROCEDURE [dbo].[SP_CrearGrupo]
 @Descripcion VARCHAR(20),
 @HoraIn VARCHAR(10),
@@ -261,6 +284,8 @@ BEGIN
 END
 GO
 
+/*Modificar Grupo*/
+
 CREATE PROCEDURE [dbo].[SP_ModificarGrupo]
 @Descripcion VARCHAR(20),
 @HoraIn VARCHAR(10),
@@ -287,6 +312,8 @@ BEGIN
 END
 GO
 
+/*Eliminar Grupo*/
+
 CREATE PROCEDURE [dbo].[SP_EliminarGrupo]
 @Descripcion VARCHAR(20)
 AS
@@ -302,17 +329,3 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [dbo].[SP_CargarGrupos] AS	
-		SELECT grupos.descripcion_grupo AS Descripcion, grupos.hora_inicio AS Hora_Inicio, grupos.hora_fin AS Hora_Fin, grupos.dia AS Dia, deportes.descripcion as Deporte, usuarios.nombre AS Profesor
-		FROM grupos INNER JOIN deportes ON grupos.deporte_id = deportes.id
-		INNER JOIN usuarios ON usuarios.id = profesor_id
-GO
-
-CREATE PROCEDURE [dbo].[SP_ConsultarGrupo] 
-@Descripcion VARCHAR(20)
-AS
-BEGIN
-		SELECT * FROM grupos
-		WHERE descripcion_grupo = @Descripcion
-END
-GO
