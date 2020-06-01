@@ -115,7 +115,7 @@ INSERT INTO roles values('Profesor');
 INSERT INTO roles values('Estudiante');
 
 /*Insert Roles Usuario*/
-INSERT INTO rol_usuario values(1,1);
+INSERT INTO rol_usuario values(1,3);
 INSERT INTO rol_usuario values(2,2);
 INSERT INTO rol_usuario values(3,3);
 INSERT INTO rol_usuario values(4,4);
@@ -144,18 +144,23 @@ AS
 BEGIN
 	IF @TipoConsulta = 'DEPORTES'
 	BEGIN
-		--Cursos
+		--Deportes
 		SELECT id,descripcion FROM deportes
 	END
+	ELSE IF @TipoConsulta = 'PROFESORES' 
+	BEGIN
+		--Profesores
+		SELECT DISTINCT usuarios.id AS id, nombre AS nom_profesor, rol_id as ROL
+		FROM usuarios INNER JOIN rol_usuario ON usuarios.id = rol_usuario.usuario_id
+		WHERE rol_usuario.rol_id = 3
+	END
 END
-
 
 /*Consulta Conexion*/
 
 CREATE PROCEDURE [dbo].[SP_ConsultarConexion] AS	
 		SELECT * FROM conexion
 GO
-
 
 /*Realizar Conexion con validacion de usuarios*/
 
@@ -184,5 +189,88 @@ AS
 	END
 GO
 
+CREATE PROCEDURE [dbo].[SP_CargarGrupos] AS	
+		SELECT grupos.descripcion_grupo AS Descripcion, grupos.hora_inicio AS Hora_Inicio, grupos.hora_fin AS Hora_Fin, grupos.dia AS Dia, deportes.descripcion as Deporte, usuarios.nombre AS Profesor
+		FROM grupos INNER JOIN deportes ON grupos.deporte_id = deportes.id
+		INNER JOIN usuarios ON usuarios.id = profesor_id
+GO
 
+CREATE PROCEDURE [dbo].[SP_ConsultarGrupo] 
+@Descripcion VARCHAR(20)
+AS
+BEGIN
+		SELECT * FROM grupos
+		WHERE descripcion_grupo = @Descripcion
+END
+GO
 
+CREATE PROCEDURE [dbo].[SP_CrearGrupo]
+@Descripcion VARCHAR(20),
+@HoraIn VARCHAR(10),
+@HoraFin VARCHAR(10),
+@Dia VARCHAR(50),
+@Id_Deporte INT,
+@Id_Profesor INT
+AS
+BEGIN
+	IF NOT EXISTS(SELECT id as id_grupo FROM grupos WHERE descripcion_grupo = @Descripcion)
+	BEGIN
+		IF NOT EXISTS(SELECT id as id_grupo FROM grupos WHERE profesor_id=@Id_Profesor AND dia = @Dia AND hora_inicio = @HoraIn)
+		BEGIN
+				INSERT INTO grupos(descripcion_grupo, hora_inicio, hora_fin, dia, deporte_id, profesor_id) 
+					VALUES (@Descripcion,@HoraIn,@HoraFin,@Dia,@Id_Deporte,@Id_Profesor)
+
+				SELECT '0' AS CodRpta,
+						'Grupo creado exitosamente' AS Mensaje
+
+				EXEC SP_CargarGrupos
+				RETURN
+		END
+		SELECT '1' AS CodRpta,
+		   'El docente seleccionado ya esta asingado a otro grupo para el mismo dia y hora de inicio' AS Mensaje
+	END
+	SELECT '1' AS CodRpta,
+		   'Ya existe un grupo con esa descripcion' AS Mensaje
+END
+GO
+
+CREATE PROCEDURE [dbo].[SP_ModificarGrupo]
+@Descripcion VARCHAR(20),
+@HoraIn VARCHAR(10),
+@HoraFin VARCHAR(10),
+@Dia VARCHAR(50),
+@Id_Deporte INT,
+@Id_Profesor INT
+AS
+BEGIN
+	IF NOT EXISTS(SELECT id as id_grupo FROM grupos WHERE descripcion_grupo!=@Descripcion AND profesor_id=@Id_Profesor AND dia = @Dia AND hora_inicio = @HoraIn)
+	BEGIN
+			UPDATE grupos
+			SET hora_inicio=@HoraIn, hora_fin=@HoraFin, dia=@Dia, deporte_id=@Id_Deporte, profesor_id=@Id_Profesor
+			WHERE descripcion_grupo=@Descripcion
+
+			SELECT '0' AS CodRpta,
+					'Grupo modificado exitosamente' AS Mensaje
+
+			EXEC SP_CargarGrupos
+			RETURN
+	END
+	SELECT '1' AS CodRpta,
+		'El docente seleccionado ya esta asingado a otro grupo para el mismo dia y hora de inicio' AS Mensaje
+END
+GO
+
+CREATE PROCEDURE [dbo].[SP_EliminarGrupo]
+@Descripcion VARCHAR(20)
+AS
+BEGIN
+	DELETE FROM grupos
+	WHERE descripcion_grupo=@Descripcion
+
+	SELECT '0' AS CodRpta,
+			'Grupo eliminado exitosamente' AS Mensaje
+
+	EXEC SP_CargarGrupos
+	RETURN
+END
+GO

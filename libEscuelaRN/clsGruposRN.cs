@@ -17,6 +17,12 @@ namespace libEscuelaRN
         #region "Atributos"
         private string strTipoCons;
         private string strNombreApp;
+        private string strDescripcion;
+        private string strHoraIn;
+        private string strHoraFin;
+        private string strDia;
+        private int intIdDeporte;
+        private int intIdProfesor;
         private string strError;
         private SqlParameter[] objDatosGrupo;
         private clsConexionBd objConex;
@@ -35,6 +41,12 @@ namespace libEscuelaRN
         #region "Propiedades"        
         public string Error { get => strError; }
         public DataSet DatosRptaBd { get => dsDatos; }
+        public string Descripcion {set => strDescripcion = value; }
+        public string HoraIn {set => strHoraIn = value; }
+        public string HoraFin {set => strHoraFin = value; }
+        public string Dia {set => strDia = value; }
+        public int IdDeporte {set => intIdDeporte = value; }
+        public int IdProfesor {set => intIdProfesor = value; }
         #endregion
 
         #region "Métodos Privados"
@@ -59,16 +71,27 @@ namespace libEscuelaRN
 
                 switch (metodoOrigen.ToLower())
                 {
-                    case "matricular":
-
+                    case "registrarope":
+                        objDatosGrupo = new SqlParameter[6];
+                        objDatosGrupo[0] = new SqlParameter("@Descripcion", strDescripcion);
+                        objDatosGrupo[1] = new SqlParameter("@HoraIn", strHoraIn);
+                        objDatosGrupo[2] = new SqlParameter("@HoraFin", strHoraFin);
+                        objDatosGrupo[3] = new SqlParameter("@Dia", strDia);
+                        objDatosGrupo[4] = new SqlParameter("@Id_Deporte", intIdDeporte);
+                        objDatosGrupo[5] = new SqlParameter("@Id_Profesor", intIdProfesor);
                         break;
                     case "llenardropdowns":
                         objDatosGrupo = new SqlParameter[1];
                         objDatosGrupo[0] = new SqlParameter("@TipoConsulta", strTipoCons);
                         break;
-                    case "consestudiante":
-
+                    case "consgrupo":
+                        objDatosGrupo = new SqlParameter[1];
+                        objDatosGrupo[0] = new SqlParameter("@Descripcion", strDescripcion);
                         break;
+                    case "modificargrupo":
+                        goto case "registrarope";
+                    case "eliminargrupo":
+                        goto case "consgrupo";
                 }
                 return true;
             }
@@ -95,10 +118,10 @@ namespace libEscuelaRN
                         strCampoId = "id";
                         strCampoTexto = "descripcion";
                         break;
-                    case "ddlAsignatura":
-                        strTipoCons = "CURSOS";
-                        strCampoId = "Id";
-                        strCampoTexto = "Curso";
+                    case "ddlProfesor":
+                        strTipoCons = "PROFESORES";
+                        strCampoId = "id";
+                        strCampoTexto = "nom_profesor";
                         break;
                     case "ddlDocente":
                         strTipoCons = "DOCENTES";
@@ -140,6 +163,162 @@ namespace libEscuelaRN
                 throw ex;
             }
         }
+
+        public bool registrar()
+        {
+            try
+            {
+                if (!agregarParam("registrarope"))
+                {
+                    return false;
+                }
+
+                objConex = new clsConexionBd(strNombreApp);
+                objConex.SQL = "[SP_CrearGrupo]";
+                objConex.ParametrosSQL = objDatosGrupo;
+
+                if (!objConex.llenarDataSet(true, true))
+                {
+                    strError = objConex.Error;
+                    objConex.cerrarCnx();
+                    objConex = null;
+                    return false;
+                }
+                dsDatos = objConex.DataSetLleno;
+                objConex.cerrarCnx();
+                objConex = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public bool modificarGrupo()
+        {
+            try
+            {
+                if (!agregarParam("modificarGrupo"))
+                {
+                    return false;
+                }
+                clsConexionBd objCnx = new clsConexionBd(strNombreApp);
+
+                objCnx.SQL = "[SP_ModificarGrupo]";
+                objCnx.ParametrosSQL = objDatosGrupo;
+
+                if (!objCnx.llenarDataSet(true, true))
+                {
+                    strError = objCnx.Error;
+                    objCnx.cerrarCnx();
+                    objCnx = null;
+                    return false;
+                }
+                dsDatos = objCnx.DataSetLleno;
+                objCnx.cerrarCnx();
+                objCnx = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public bool eliminarGrupo()
+        {
+            try
+            {
+                if (!agregarParam("eliminarGrupo"))
+                {
+                    return false;
+                }
+                clsConexionBd objCnx = new clsConexionBd(strNombreApp);
+
+                objCnx.SQL = "[SP_EliminarGrupo]";
+                objCnx.ParametrosSQL = objDatosGrupo;
+
+                if (!objCnx.llenarDataSet(true, true))
+                {
+                    strError = objCnx.Error;
+                    objCnx.cerrarCnx();
+                    objCnx = null;
+                    return false;
+                }
+                dsDatos = objCnx.DataSetLleno;
+                objCnx.cerrarCnx();
+                objCnx = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public bool cargarGrupo()
+        {
+            try
+            {
+                objConex = new clsConexionBd(strNombreApp);
+                objConex.SQL = "[SP_CargarGrupos]";
+                objConex.ParametrosSQL = objDatosGrupo;
+
+                if (!objConex.llenarDataSet(false, true))
+                {
+                    strError = objConex.Error;
+                    objConex.cerrarCnx();
+                    objConex = null;
+                    return false;
+                }
+                dsDatos = objConex.DataSetLleno;
+                objConex.cerrarCnx();
+                objConex = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public bool consultarGrupo()
+        {
+            try
+            {
+                if (!agregarParam("consGrupo"))
+                {
+                    return false;
+                }
+                clsConexionBd objCnx = new clsConexionBd(strNombreApp);
+
+                objCnx.SQL = "[SP_ConsultarGrupo]";
+                objCnx.ParametrosSQL = objDatosGrupo;
+
+                if (!objCnx.llenarDataSet(true, true))
+                {
+                    strError = objCnx.Error;
+                    objCnx.cerrarCnx();
+                    objCnx = null;
+                    return false;
+                }
+                dsDatos = objCnx.DataSetLleno;
+                objCnx.cerrarCnx();
+                objCnx = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         #endregion
     }
 }
