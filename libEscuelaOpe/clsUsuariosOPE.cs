@@ -119,6 +119,7 @@ namespace libEscuelaOpe
                     return false;
                 }
                 clsUsuariosRN objRn = new clsUsuariosRN(this.strNombreApp);
+                
 
                 objRn.NombreUsuario = strNombreUsuario;
                 objRn.Contrasena = strContrasena;

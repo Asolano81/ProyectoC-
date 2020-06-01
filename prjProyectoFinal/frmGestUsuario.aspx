@@ -66,22 +66,9 @@
                                     <br />
                                     <div class="input-group">
                                         <asp:Label ID="lblRol" runat="server" CssClass="input-group-addon" Text="Rol de Aceeso"></asp:Label>
-                                        <asp:DropDownList ID="cbxRol" runat="server" CssClass="form-control" Enabled="true" AutoPostBack="True" OnSelectedIndexChanged="cbxRol_SelectedIndexChanged">
-                                            <asp:ListItem>...Seleccione...</asp:ListItem>
-                                            <asp:ListItem>Padre</asp:ListItem>
-                                            <asp:ListItem>Profesor</asp:ListItem>
-                                            <asp:ListItem>Estudiante</asp:ListItem>
-                                            <asp:ListItem>Director</asp:ListItem>
-                                        </asp:DropDownList>
+                                        <asp:DropDownList ID="ddlRol" runat="server" CssClass="form-control" Enabled="true" AutoPostBack="false"></asp:DropDownList>
                                     </div>
                                     <br />
-                                    <asp:Panel ID="pnlPadre" runat="server" Visible="false">
-                                        <div class="input-group">
-                                        <asp:Label ID="lblIdPadre" runat="server" CssClass="input-group-addon" Text="Identificación Padre"></asp:Label>
-                                        <asp:TextBox ID="txtIdPadre" runat="server" CssClass="form-control" TextMode="Number" Enabled="false"></asp:TextBox>
-                                    </div>
-                                    <br />
-                                    </asp:Panel>
                                     <asp:Panel ID="pnlRegistrar" runat="server" Visible="false">
                                         <asp:Button ID="btnRegistrar" runat="server" CssClass="btn btn-success" Text="Registrar" />
                                     </asp:Panel>
@@ -93,7 +80,17 @@
                                         <asp:Button ID="btnConsultar2" runat="server" CssClass="btn btn-success" Text="Consultar" />
                                         <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-success" Text="Eliminar" Enabled="false" />
                                     </asp:Panel>
-                                </div>
+                                    <br />
+                                    <asp:Panel ID="pnlMensaje" runat="server" Visible="false">
+                                        <div class="input-group">
+                                            <div class="col-sm-12">
+                                                <div class="alert alert-danger" role="alert">
+                                                    <asp:Label ID="lblMensajeErrorCargaLista" runat="server"></asp:Label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
+                                </div>                         
                             </div>
                         </div>
                     </div>

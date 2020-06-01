@@ -29,7 +29,7 @@ namespace prjProyectoFinal
                 {
                     if (!objUsuario.Contrasena.Equals(string.Empty))
                     {
-                        lblUserConex.Text = "Conectado: " + objUsuario.Nombre;
+                        lblUserConex.Text = "Conectado: " + objUsuario.Nombre + " - " + objUsuario.Rol;
                         mnuPpal.Items.RemoveAt(0);
                         pnlLogin.Visible = false;
                         if (Request.RawUrl.ToString().Equals("/frmLogin.aspx"))

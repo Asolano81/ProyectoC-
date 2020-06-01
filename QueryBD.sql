@@ -8,7 +8,7 @@ contrasena varchar(50) not null,
 identificacion varchar(50) not null,
 nombre varchar(50) not null,
 apellido varchar(50) not null,
-fecha_nacimiento date not null,
+fecha_nacimiento varchar(50) not null,
 telefono varchar(50) not null,
 padre_id int,
 constraint fk_padre  foreign key(padre_id) references usuarios(id) 
@@ -183,6 +183,50 @@ AS
 		   'Datos incorrectos por favor validar registro' AS Mensaje		
 	END
 GO
+
+
+
+
+CREATE PROCEDURE [dbo].[SP_CrearUsuarios]
+@nombre_usuario varchar(50),				
+@email varchar(50),
+@contrasena varchar(50),
+@identificacion varchar(50),
+@nombre varchar(100),
+@apellido varchar(20),
+@fecha_nacimiento varchar(50),
+@telefono varchar(50),
+@padre_id int,
+@rol_id int
+AS
+	BEGIN		
+		-- Validar que no exista un usuario repetido.
+		IF EXISTS(select nombre_usuario,identificacion from usuarios WHERE nombre_usuario = @nombre_usuario AND identificacion = @identificacion)
+
+		BEGIN
+			SELECT '0' AS respuesta,
+				'El usuario ya esta registrado' AS Mensaje
+			RETURN
+		END
+
+		-- Validar el rol para el registro de estudiante 
+		IF EXISTS(select nombre_usuario,identificacion from usuarios WHERE nombre_usuario = @nombre_usuario AND identificacion = @identificacion)
+
+
+		BEGIN
+			INSERT INTO conexion(nombre, contrasena, rol)values(@Nombre,@contrasena,@Rol)
+
+			SELECT '0' AS respuesta,
+				'Usuario conectado' AS Mensaje
+
+			RETURN
+		END
+		
+		SELECT '1' AS Respuesta,
+		   'Datos incorrectos por favor validar registro' AS Mensaje		
+	END
+GO
+
 
 
 
