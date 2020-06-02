@@ -80,8 +80,6 @@
                                         <asp:Button ID="btnConsultar2" runat="server" CssClass="btn btn-success" Text="Consultar" OnClick="btnConsultar2_Click" />
                                         <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-success" Text="Eliminar" Enabled="false" OnClick="btnEliminar_Click" />
                                     </asp:Panel>
-                                    <br />
-                                    <asp:GridView ID="gvMatricula" runat="server" CssClass="table table-responsive table-bordered table-condensed table-hover"></asp:GridView>
                                 </div>
                             </div>
                         </div>
@@ -111,6 +109,23 @@
                                     </div>
                                 </div>
                             </asp:Panel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title Centrar-Medio">Grupos Agregados</h1>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body center-block">
+                        <br />
+                        <div class="container-fluid Centrar-Medio">
+                            <asp:GridView ID="gvMatricula" runat="server" CssClass="table table-responsive table-bordered table-condensed table-hover"></asp:GridView>
                         </div>
                     </div>
                 </div>

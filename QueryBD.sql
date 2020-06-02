@@ -115,7 +115,7 @@ INSERT INTO roles values('Profesor');
 INSERT INTO roles values('Estudiante');
 
 /*Insert Roles Usuario*/
-INSERT INTO rol_usuario values(1,3);
+INSERT INTO rol_usuario values(1,1);
 INSERT INTO rol_usuario values(2,2);
 INSERT INTO rol_usuario values(3,3);
 INSERT INTO rol_usuario values(4,4);
@@ -231,10 +231,6 @@ AS
 		   'Datos incorrectos por favor validar registro' AS Mensaje		
 	END
 GO
-
-
-
-
 
 /*Consultar Grupo*/
 CREATE PROCEDURE [dbo].[SP_ConsultarGrupo] 

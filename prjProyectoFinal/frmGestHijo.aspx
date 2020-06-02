@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body Centrar-Medio">
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                         <br />
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -36,7 +36,7 @@
                                     <br />
                                     <div class="input-group">
                                         <asp:Label ID="lblContraseña" runat="server" CssClass="input-group-addon" Text="Contraseña"></asp:Label>
-                                        <asp:TextBox ID="txtContraseña" runat="server" CssClass="form-control" TextMode="Password" Enabled="false"></asp:TextBox>
+                                        <asp:TextBox ID="txtContraseña" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                                     </div>
                                     <br />
                                     <div class="input-group">
@@ -70,10 +70,10 @@
                                     </div>
                                     <br />
                                     <asp:Panel ID="pnlRegistrar" runat="server" Visible="false">
-                                        <asp:Button ID="btnRegistrar" runat="server" CssClass="btn btn-success" Text="Registrar" />
+                                        <asp:Button ID="btnRegistrar" runat="server" CssClass="btn btn-success" Text="Registrar" OnClick="btnRegistrar_Click" />
                                     </asp:Panel>
                                     <asp:Panel ID="pnlModificar" runat="server" Visible="false">
-                                        <asp:Button ID="btnConsultar1" runat="server" CssClass="btn btn-success" Text="Consultar" />
+                                        <asp:Button ID="btnConsultar1" runat="server" CssClass="btn btn-success" Text="Consultar" OnClick="btnConsultar1_Click" />
                                         <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-success" Text="Modificar" Enabled="false" />
                                     </asp:Panel>
                                     <asp:Panel ID="pnlEliminar" runat="server" Visible="false">
@@ -100,9 +100,36 @@
                         <div class="row"> 
                             <asp:Label ID="lblInstruccion2" runat="server" CssClass="h5" Text="2. Para modificar o eliminar un hijo registrado debe consultarlo primero con la identificación"></asp:Label>
                         </div>
+                        <br />
+                        <div class="row Centrar-Medio">
+                            <asp:Panel ID="pnlMensaje" runat="server" Visible="false">
+                                <div class="input-group">
+                                    <div class="alert alert-info" role="alert">
+                                        <asp:Label ID="lblMensajeError" runat="server"></asp:Label>
+                                    </div>
+                                </div>
+                            </asp:Panel>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title Centrar-Medio">Estudiantes Registrados</h1>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body center-block">
+                        <br />
+                        <div class="container-fluid Centrar-Medio">
+                            <asp:GridView ID="gvMatricula" runat="server" CssClass="table table-responsive table-bordered table-condensed table-hover"></asp:GridView>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>
