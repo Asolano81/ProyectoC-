@@ -28,7 +28,7 @@ namespace prjProyectoFinal
             this.pnlMensaje.Visible = true;
         }
 
-        public void inhabilitarControles(string op)
+        private void inhabilitarControles(string op)
         {
             switch (op)
             {
@@ -45,6 +45,7 @@ namespace prjProyectoFinal
                     btnEliminar.Enabled = false;
                     btnConsultar1.Enabled = true;
                     btnConsultar2.Enabled = true;
+                    pnlMensaje.Visible = false;
                     break;
                 case "consultarGrupo":
                     txtDescripcionGrupo.Enabled = false;
@@ -75,12 +76,21 @@ namespace prjProyectoFinal
                     btnConsultar2.Enabled = true;
                     btnEliminar.Enabled = false;
                     break;
+                case "btnConsultar2_Click":
+                    txtDescripcionGrupo.Enabled = false;
+                    ddlDeporte.Enabled = false;
+                    ddlDias.Enabled = false;
+                    ddlProfesor.Enabled = false;
+                    ddlHoraInicio.Enabled = false;
+                    btnConsultar2.Enabled = false;
+                    btnEliminar.Enabled = true;
+                    break;
                 default:
                     goto case "cbxAccion_SelectedIndexChanged";
             }
         }
 
-        public void limpiarControles()
+        private void limpiarControles()
         {
             txtDescripcionGrupo.Text = string.Empty;
             txtHoraFin.Text = string.Empty;
@@ -111,10 +121,58 @@ namespace prjProyectoFinal
             }
         }
 
+        private bool validar(string strMetodoOrigen)
+        {
+            switch (strMetodoOrigen.ToLower())
+            {
+                case "registrar":
+                    if (this.txtDescripcionGrupo.Text.Trim() == string.Empty)
+                    {
+                        mostrarMsj("Debe ingresar una Descripcion(Nombre o Codigo de grupo)");
+                        return false;
+                    }
+                    if (this.ddlDeporte.SelectedIndex == 0)
+                    {
+                        mostrarMsj("Debe seleccionar un Deporte");
+                        return false;
+                    }
+                    if (this.ddlProfesor.SelectedIndex == 0)
+                    {
+                        mostrarMsj("Debe seleccionar un profesor");
+                        return false;
+                    }
+                    if (this.ddlDias.SelectedIndex == 0)
+                    {
+                        mostrarMsj("Debe seleccionar un Día");
+                        return false;
+                    }
+                    if (this.ddlHoraInicio.SelectedIndex == 0)
+                    {
+                        mostrarMsj("Debe seleccionar una hora de inicio");
+                        return false;
+                    }     
+                    break;
+                case "modificar":
+                    goto case "registrar";
+                case "consultargrupo":
+                    if (this.txtDescripcionGrupo.Text.Trim() == string.Empty)
+                    {
+                        mostrarMsj("Debe ingresar la Descripcion(Nombre o Codigo de grupo) para poder consultarlo");
+                        return false;
+                    }
+                    break;
+            }
+            return true;
+        }
+
         private void registrar()
         {
             try
             {
+                if (!validar("registrar"))
+                {
+                    return;
+                }
                 clsGruposOPE objMatri = new clsGruposOPE(strNombreAplica);
 
                 objMatri.Descripcion = this.txtDescripcionGrupo.Text.Trim();
@@ -145,6 +203,10 @@ namespace prjProyectoFinal
         {
             try
             {
+                if (!validar("modificar"))
+                {
+                    return;
+                }
                 clsGruposOPE objMatri = new clsGruposOPE(strNombreAplica);
 
                 objMatri.Descripcion = this.txtDescripcionGrupo.Text.Trim();
@@ -221,8 +283,12 @@ namespace prjProyectoFinal
             }
         }
 
-        private void consultarGrupo()
+        private bool consultarGrupo()
         {
+            if (!validar("consultarGrupo"))
+            {
+                return false;
+            }
             try
             {
                 clsGruposOPE objMatri = new clsGruposOPE(strNombreAplica);
@@ -233,7 +299,7 @@ namespace prjProyectoFinal
                 {
                     mostrarMsj(objMatri.Error);
                     objMatri = null;
-                    return;
+                    return false;
                 }
                 txtDescripcionGrupo.Text = objMatri.Descripcion;
                 ddlDias.SelectedValue = objMatri.Dia;
@@ -244,10 +310,12 @@ namespace prjProyectoFinal
                 mostrarMsj(objMatri.Mensaje);
                 objMatri = null;
                 inhabilitarControles("consultarGrupo");
+                return true;
             }
             catch (Exception ex)
             {
                 mostrarMsj(ex.Message);
+                return false;
             }
         }
 
@@ -338,7 +406,11 @@ namespace prjProyectoFinal
 
         protected void btnConsultar2_Click(object sender, EventArgs e)
         {
-            consultarGrupo();
+            if (consultarGrupo())
+            {
+                inhabilitarControles("btnConsultar2_Click");
+            }
+            
         }
     }
 }

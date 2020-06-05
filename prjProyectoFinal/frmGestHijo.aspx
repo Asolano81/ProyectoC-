@@ -74,11 +74,11 @@
                                     </asp:Panel>
                                     <asp:Panel ID="pnlModificar" runat="server" Visible="false">
                                         <asp:Button ID="btnConsultar1" runat="server" CssClass="btn btn-success" Text="Consultar" OnClick="btnConsultar1_Click" />
-                                        <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-success" Text="Modificar" Enabled="false" />
+                                        <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-success" Text="Modificar" Enabled="false" OnClick="btnModificar_Click" />
                                     </asp:Panel>
                                     <asp:Panel ID="pnlEliminar" runat="server" Visible="false">
-                                        <asp:Button ID="btnConsultar2" runat="server" CssClass="btn btn-success" Text="Consultar" />
-                                        <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-success" Text="Eliminar" Enabled="false" />
+                                        <asp:Button ID="btnConsultar2" runat="server" CssClass="btn btn-success" Text="Consultar" OnClick="btnConsultar2_Click" />
+                                        <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-success" Text="Eliminar" Enabled="false" OnClick="btnEliminar_Click" />
                                     </asp:Panel>
                                 </div>
                             </div>

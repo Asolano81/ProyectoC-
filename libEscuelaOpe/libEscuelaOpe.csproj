@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsGruposOPE.cs" />
+    <Compile Include="clsMatriculasOPE.cs" />
     <Compile Include="clsRolesOPE.cs" />
     <Compile Include="clsUsuariosOPE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

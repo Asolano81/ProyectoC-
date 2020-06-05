@@ -15,7 +15,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body style="background-color: black">
-  
+
     <form id="frmMaestroPrincipal" runat="server" style="background-color: black">
         <br />
         <div class="col-md-12">
@@ -37,7 +37,6 @@
                                 <div class="navbar navbar-default">
                                     <div class="collapse navbar-collapse" id="navbarPpal">
                                         <asp:Menu ID="mnuPpal" runat="server" OrienopcDirectorestation="Horizontal" RenderingMode="List" IncludeStyleBlock="false" StaticMenuStyle-CssClass="nav navbar-nav" DynamicMenuStyle-CssClass="dropdown-menu" OnMenuItemClick="mnuPpal_MenuItemClick">
-
                                             <Items>
                                                 <asp:MenuItem NavigateUrl="~/frmLogin.aspx" Text="Iniciar" Value="opcIngresar"></asp:MenuItem>
                                             </Items>
@@ -104,7 +103,6 @@
                                 </div>
                             </asp:Panel>
                         </div>
-
                         <asp:Panel ID="pnlInicio" runat="server" Visible="false">
                             <div class="row Centrar-Medio">
                                 <asp:Label ID="lblTituloInicio" runat="server" CssClass="h3" Text="Ofrecemos la mayor calidad en nuestros centros deportivos y tenemos pasantias internacionales"></asp:Label>

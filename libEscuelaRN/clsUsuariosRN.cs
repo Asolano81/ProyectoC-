@@ -36,12 +36,30 @@ namespace libEscuelaRN
         {
             this.strNombreApp = nombreApp;
             strError = string.Empty;
+            strContrasena = string.Empty;
+            strIdentificacion = string.Empty;
+            strRol = string.Empty;
+            strNombre = string.Empty;
+            strEmail = string.Empty;
+            strApellido = string.Empty;
+            strFechaNacimiento = string.Empty;
+            strTelefono = string.Empty;
+            formulario = string.Empty;
         }
         public clsUsuariosRN(string nombreApp, string formulario)
         {
             this.strNombreApp = nombreApp;
             strError = string.Empty;
             this.formulario = formulario;
+            strContrasena = string.Empty;
+            strIdentificacion = string.Empty;
+            strRol = string.Empty; ;
+            strNombre = string.Empty;
+            strEmail = string.Empty;
+            strApellido = string.Empty;
+            strFechaNacimiento = string.Empty;
+            strTelefono = string.Empty;
+            strIdentPadre = string.Empty;
         }
         #endregion
 
@@ -82,12 +100,134 @@ namespace libEscuelaRN
                         strError = "La contraseña no puede estar vacia";
                         return false;
                     }
+                    if (strRol == string.Empty)
+                    {
+                        strError = "El rol no puede estar vacio";
+                        return false;
+                    }
                     break;
+                case "registrarestudiante":
+                    if (strNombreUsuario == string.Empty)
+                    {
+                        strError = "El nombre de usuario no puede estar vacio";
+                        return false;
+                    }
+                    if (strEmail == string.Empty)
+                    {
+                        strError = "El email no puede estar vacio";
+                        return false;
+                    }
+                    if (strEmail == string.Empty)
+                    {
+                        strError = "El nombre de usuario no puede estar vacio";
+                        return false;
+                    }
+                    if (strContrasena == string.Empty)
+                    {
+                        strError = "La contraseña no puede estar vacia";
+                        return false;
+                    }
+                    if (strIdentificacion == string.Empty)
+                    {
+                        strError = "La identificación no puede estar vacia";
+                        return false;
+                    }
+                    if (strNombre == string.Empty)
+                    {
+                        strError = "El nombre no puede estar vacio";
+                        return false;
+                    }
+                    if (strApellido == string.Empty)
+                    {
+                        strError = "El apellido no puede estar vacio";
+                        return false;
+                    }
+                    if (strFechaNacimiento == string.Empty)
+                    {
+                        strError = "La fecha de nacimiento no puede estar vacia";
+                        return false;
+                    }
+                    if (strTelefono == string.Empty)
+                    {
+                        strError = "El telefono no puede estar vacio";
+                        return false;
+                    }
+                    if (strIdentPadre == string.Empty)
+                    {
+                        strError = "La identificación del padre no puede estar vacio";
+                        return false;
+                    }
+                    break;
+                case "modificarusuario":
+                    if (strNombreUsuario == string.Empty)
+                    {
+                        strError = "El nombre de usuario no puede estar vacio";
+                        return false;
+                    }
+                    if (strEmail == string.Empty)
+                    {
+                        strError = "El email no puede estar vacio";
+                        return false;
+                    }
+                    if (strEmail == string.Empty)
+                    {
+                        strError = "El nombre de usuario no puede estar vacio";
+                        return false;
+                    }
+                    if (strContrasena == string.Empty)
+                    {
+                        strError = "La contraseña no puede estar vacia";
+                        return false;
+                    }
+                    if (strNombre == string.Empty)
+                    {
+                        strError = "El nombre no puede estar vacio";
+                        return false;
+                    }
+                    if (strApellido == string.Empty)
+                    {
+                        strError = "El apellido no puede estar vacio";
+                        return false;
+                    }
+                    if (strFechaNacimiento == string.Empty)
+                    {
+                        strError = "La fecha de nacimiento no puede estar vacia";
+                        return false;
+                    }
+                    if (strTelefono == string.Empty)
+                    {
+                        strError = "El telefono no puede estar vacio";
+                        return false;
+                    }
+                    if (strIdentPadre == string.Empty)
+                    {
+                        strError = "La identificación del padre no puede estar vacio";
+                        return false;
+                    }
+                    if (formulario == string.Empty)
+                    {
+                        strError = "Olvidó enviar el nombre del formulario";
+                        return false;
+                    }
+                    break;
+                case "eliminarusuario":
+                    if (strIdentificacion == string.Empty)
+                    {
+                        strError = "La identificación no puede estar vacia";
+                        return false;
+                    }
+                    if (formulario == string.Empty)
+                    {
+                        strError = "Olvidó enviar el nombre del formulario";
+                        return false;
+                    }
+                    break;
+                case "consultarusuario":
+                    goto case "eliminarusuario";
             }
             return true;
-            
         }
-         
+
         private bool agregarParam(string metodoOrigen)
         {
             try
@@ -119,8 +259,35 @@ namespace libEscuelaRN
                         break;
                     case "consusuario":
                         objDatosUsuario = new SqlParameter[2];
-                        objDatosUsuario[1] = new SqlParameter("@formulario", formulario);
-                        objDatosUsuario[0] = new SqlParameter("@identificacion", strIdentificacion);
+                        objDatosUsuario[0] = new SqlParameter("@formulario", formulario);
+                        objDatosUsuario[1] = new SqlParameter("@identificacion", strIdentificacion);
+                        break;
+                    case "modificarusuario":
+                        objDatosUsuario = new SqlParameter[10];
+
+                        if (formulario.Equals("frmGestHijo"))
+                        {
+                            objDatosUsuario[9] = new SqlParameter("@identPadre", strIdentPadre);
+                        }
+                        else
+                        {
+                            objDatosUsuario[9] = new SqlParameter("@identPadre", "SIN INFO");
+                        }
+               
+                        objDatosUsuario[0] = new SqlParameter("@formulario", formulario);
+                        objDatosUsuario[1] = new SqlParameter("@identificacion", strIdentificacion);
+                        objDatosUsuario[2] = new SqlParameter("@nombre_usuario", strNombreUsuario);
+                        objDatosUsuario[3] = new SqlParameter("@email", strEmail);
+                        objDatosUsuario[4] = new SqlParameter("@contrasena", strContrasena);
+                        objDatosUsuario[5] = new SqlParameter("@nombre", strNombre);
+                        objDatosUsuario[6] = new SqlParameter("@apellido", strApellido);
+                        objDatosUsuario[7] = new SqlParameter("@fecha_nacimiento", strFechaNacimiento);
+                        objDatosUsuario[8] = new SqlParameter("@telefono", strTelefono);
+                        break;
+                    case "eliminarusuario":
+                        objDatosUsuario = new SqlParameter[2];
+                        objDatosUsuario[0] = new SqlParameter("@formulario", formulario);
+                        objDatosUsuario[1] = new SqlParameter("@identificacion", strIdentificacion);
                         break;
                 }
                 return true;
@@ -171,8 +338,8 @@ namespace libEscuelaRN
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                strError = ex.Message;
+                return false;
             }
         }
 
@@ -180,6 +347,11 @@ namespace libEscuelaRN
         {
             try
             {
+                if (!validar("consConex"))
+                {
+                    return false;
+                }
+
                 clsConexionBd objCnx = new clsConexionBd(strNombreApp);
 
                 objCnx.SQL = "SP_ConsultarConexion";
@@ -199,8 +371,8 @@ namespace libEscuelaRN
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                strError = ex.Message;
+                return false;
             }
         }
 
@@ -231,8 +403,8 @@ namespace libEscuelaRN
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                strError = ex.Message;
+                return false;
             }
         }
 
@@ -264,8 +436,72 @@ namespace libEscuelaRN
             }
             catch (Exception ex)
             {
+                strError = ex.Message;
+                return false;
+            }
+        }
 
-                throw ex;
+        public bool modificarUsuario()
+        {
+            try
+            {
+                if (!agregarParam("modificarUsuario"))
+                {
+                    return false;
+                }
+                clsConexionBd objCnx = new clsConexionBd(strNombreApp);
+
+                objCnx.SQL = "[SP_ModificarUsuario]";
+                objCnx.ParametrosSQL = objDatosUsuario;
+
+                if (!objCnx.llenarDataSet(true, true))
+                {
+                    strError = objCnx.Error;
+                    objCnx.cerrarCnx();
+                    objCnx = null;
+                    return false;
+                }
+                dsDatos = objCnx.DataSetLleno;
+                objCnx.cerrarCnx();
+                objCnx = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                strError = ex.Message;
+                return false;
+            }
+        }
+
+        public bool eliminarUsuario()
+        {
+            try
+            {
+                if (!agregarParam("eliminarUsuario"))
+                {
+                    return false;
+                }
+                clsConexionBd objCnx = new clsConexionBd(strNombreApp);
+
+                objCnx.SQL = "[SP_EliminarUsuario]";
+                objCnx.ParametrosSQL = objDatosUsuario;
+
+                if (!objCnx.llenarDataSet(true, true))
+                {
+                    strError = objCnx.Error;
+                    objCnx.cerrarCnx();
+                    objCnx = null;
+                    return false;
+                }
+                dsDatos = objCnx.DataSetLleno;
+                objCnx.cerrarCnx();
+                objCnx = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                strError = ex.Message;
+                return false;
             }
         }
 
@@ -292,7 +528,8 @@ namespace libEscuelaRN
             catch (Exception ex)
             {
 
-                throw ex;
+                strError = ex.Message;
+                return false;
             }
         }
 
@@ -323,8 +560,41 @@ namespace libEscuelaRN
             }
             catch (Exception ex)
             {
+                strError = ex.Message;
+                return false;
+            }
+        }
 
-                throw ex;
+        public bool cerrarSesion()
+        {
+            try
+            {
+                if (!validar("cerrarSesion"))
+                {
+                    return false;
+                }
+
+                clsConexionBd objCnx = new clsConexionBd(strNombreApp);
+
+                objCnx.SQL = "[SP_CerrarSesion]";
+                objCnx.ParametrosSQL = objDatosUsuario;
+
+                if (!objCnx.llenarDataSet(false, true))
+                {
+                    strError = objCnx.Error;
+                    objCnx.cerrarCnx();
+                    objCnx = null;
+                    return false;
+                }
+                dsDatos = objCnx.DataSetLleno;
+                objCnx.cerrarCnx();
+                objCnx = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                strError = ex.Message;
+                return false;
             }
         }
         #endregion

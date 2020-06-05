@@ -13,7 +13,6 @@ namespace prjProyectoFinal
 
     {   
     
-    
         #region "Variables Globales"
         private static string strNombreAplica;
         #endregion
@@ -106,8 +105,10 @@ namespace prjProyectoFinal
             MenuItem mnuDirector = new MenuItem("Directores", "opcDirectores");
             MenuItem Gestionar = new MenuItem("Gestionar", "opcGestionar");
             MenuItem Usuarios = new MenuItem("Usuarios", "opcUsuarios");
+            MenuItem AdminRoles = new MenuItem("Administrar roles", "opcAdminRoles");
             MenuItem Grupos = new MenuItem("Grupos", "opcGrupos");
             MenuItem mnuInformes = new MenuItem("Informes", "opcInformes");
+            MenuItem mnuCerrarSesion = new MenuItem("Cerrar sesion", "opcCerrarSesion");
             mnuPadre.ChildItems.Add(GestionarHijos);
             mnuPadre.ChildItems.Add(AproRecMatri);
             mnuProfesor.ChildItems.Add(ConsDep);
@@ -116,28 +117,43 @@ namespace prjProyectoFinal
             mnuEstudiante.ChildItems.Add(ConsHor);
             Gestionar.ChildItems.Add(Usuarios);
             Gestionar.ChildItems.Add(Grupos);
+            Gestionar.ChildItems.Add(AdminRoles);
             mnuDirector.ChildItems.Add(Gestionar);
             switch (rol)
             {
                 case "Padre":
                     mnuPpal.Items.AddAt(0, mnuPadre);
+                    mnuPpal.Items.AddAt(1, mnuCerrarSesion);
                     break;
                 case "Profesor":   
                     mnuPpal.Items.AddAt(0, mnuProfesor);
+                    mnuPpal.Items.AddAt(1, mnuCerrarSesion);
                     break;
                 case "Estudiante":          
-                    mnuPpal.Items.AddAt(0, mnuEstudiante);                    
+                    mnuPpal.Items.AddAt(0, mnuEstudiante);
+                    mnuPpal.Items.AddAt(1, mnuCerrarSesion);
                     break;
                 case "Director":
                     mnuPpal.Items.AddAt(0, mnuDirector);
                     mnuPpal.Items.AddAt(1, mnuPadre);
                     mnuPpal.Items.AddAt(2, mnuProfesor);
                     mnuPpal.Items.AddAt(3, mnuEstudiante);
-                    mnuPpal.Items.AddAt(4, mnuInformes); 
+                    mnuPpal.Items.AddAt(4, mnuInformes);
+                    mnuPpal.Items.AddAt(5, mnuCerrarSesion);
                     break;
                 default:
                     break;
             } 
+        }
+
+        private void llenarMenuLogin()
+        {
+            mnuPpal.Items.Clear();
+
+            MenuItem mnuIniciarSesion = new MenuItem("Iniciar sesion", "opcIniciar");
+
+            mnuPpal.Items.AddAt(0, mnuIniciarSesion);
+            
         }
 
         private void realizarConexion()
@@ -167,6 +183,21 @@ namespace prjProyectoFinal
             }
         }
 
+        private void cerrarSesion()
+        {
+            strNombreAplica = Assembly.GetExecutingAssembly().GetName().Name + ".xml";
+            clsUsuariosOPE objUsuario = new clsUsuariosOPE(strNombreAplica);
+            if (objUsuario.cerrarSesion())
+            {
+                lblUserConex.Text = "Desconectado";
+                llenarMenuLogin();
+                pnlInicio.Visible = false;
+                pnlLogin.Visible = true;
+                Response.Redirect("~/frmLogin.aspx");
+                return;
+            }
+        }
+
         #endregion
 
         protected void btnIniciar_Click(object sender, EventArgs e)
@@ -192,11 +223,13 @@ namespace prjProyectoFinal
                 case "Grupos":
                     Response.Redirect("~/frmGestGrupo.aspx");
                     break;
-                default:
+                case "Administrar roles":
+                    Response.Redirect("~/frmAdminRoles.aspx");
+                    break;
+                case "Cerrar sesion":
+                    cerrarSesion();
                     break;
             }
-            
-
         }
     }
 }

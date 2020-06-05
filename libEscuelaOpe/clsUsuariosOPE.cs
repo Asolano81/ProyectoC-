@@ -35,12 +35,35 @@ namespace libEscuelaOpe
         #region "Constructor"
         public clsUsuariosOPE(string nombreApp)
         {
-            this.strNombreApp = nombreApp;    
+            this.strNombreApp = nombreApp;
+            strContrasena = string.Empty;
+            strIdentificacion = string.Empty; 
+            strRol = string.Empty; 
+            strNombre = string.Empty; 
+            strEmail = string.Empty; 
+            strApellido = string.Empty; 
+            strFechaNacimiento = string.Empty; 
+            strTelefono = string.Empty; 
+            formulario = string.Empty; 
+            strIdentPadre = string.Empty; 
+            strError = string.Empty; 
+            strMensaje = string.Empty; 
         }
         public clsUsuariosOPE(string nombreApp, string formulario)
         {
             this.strNombreApp = nombreApp;
             this.formulario = formulario;
+            strContrasena = string.Empty;
+            strIdentificacion = string.Empty; 
+            strRol = string.Empty; ;
+            strNombre = string.Empty; 
+            strEmail = string.Empty; 
+            strApellido = string.Empty; 
+            strFechaNacimiento = string.Empty; 
+            strTelefono = string.Empty; 
+            strIdentPadre = string.Empty; 
+            strError = string.Empty; 
+            strMensaje = string.Empty; 
         }
         #endregion
 
@@ -62,7 +85,8 @@ namespace libEscuelaOpe
         public GridView GvGen { set => gvGen = value; }
         #endregion
 
-        #region "Métodos Privados"       
+        #region "Métodos Privados"      
+        
         private bool validar(string metodoOrigen)
         {
             if (strNombreApp == string.Empty)
@@ -83,10 +107,132 @@ namespace libEscuelaOpe
                         strError = "La contraseña no puede estar vacia";
                         return false;
                     }
+                    if (strRol == string.Empty)
+                    {
+                        strError = "El rol no puede estar vacio";
+                        return false;
+                    }
                     break;
+                case "registrarEstudiante":
+                    if (strNombreUsuario == string.Empty)
+                    {
+                        strError = "El nombre de usuario no puede estar vacio";
+                        return false;
+                    }
+                    if (strEmail == string.Empty)
+                    {
+                        strError = "El email no puede estar vacio";
+                        return false;
+                    }
+                    if (strEmail == string.Empty)
+                    {
+                        strError = "El nombre de usuario no puede estar vacio";
+                        return false;
+                    }
+                    if (strContrasena == string.Empty)
+                    {
+                        strError = "La contraseña no puede estar vacia";
+                        return false;
+                    }
+                    if (strIdentificacion == string.Empty)
+                    {
+                        strError = "La identificación no puede estar vacia";
+                        return false;
+                    }
+                    if (strNombre == string.Empty)
+                    {
+                        strError = "El nombre no puede estar vacio";
+                        return false;
+                    }
+                    if (strApellido == string.Empty)
+                    {
+                        strError = "El apellido no puede estar vacio";
+                        return false;
+                    }
+                    if (strFechaNacimiento == string.Empty)
+                    {
+                        strError = "La fecha de nacimiento no puede estar vacia";
+                        return false;
+                    }
+                    if (strTelefono == string.Empty)
+                    {
+                        strError = "El telefono no puede estar vacio";
+                        return false;
+                    }
+                    if ( strIdentPadre == string.Empty)
+                    {
+                        strError = "La identificación del padre no puede estar vacio";
+                        return false;
+                    }
+                    break;
+                case "modificarOpe":
+                    if (strNombreUsuario == string.Empty)
+                    {
+                        strError = "El nombre de usuario no puede estar vacio";
+                        return false;
+                    }
+                    if (strEmail == string.Empty)
+                    {
+                        strError = "El email no puede estar vacio";
+                        return false;
+                    }
+                    if (strEmail == string.Empty)
+                    {
+                        strError = "El nombre de usuario no puede estar vacio";
+                        return false;
+                    }
+                    if (strContrasena == string.Empty)
+                    {
+                        strError = "La contraseña no puede estar vacia";
+                        return false;
+                    }
+                    if (strNombre == string.Empty)
+                    {
+                        strError = "El nombre no puede estar vacio";
+                        return false;
+                    }
+                    if (strApellido == string.Empty)
+                    {
+                        strError = "El apellido no puede estar vacio";
+                        return false;
+                    }
+                    if (strFechaNacimiento == string.Empty)
+                    {
+                        strError = "La fecha de nacimiento no puede estar vacia";
+                        return false;
+                    }
+                    if (strTelefono == string.Empty)
+                    {
+                        strError = "El telefono no puede estar vacio";
+                        return false;
+                    }
+                    if (strIdentPadre == string.Empty)
+                    {
+                        strError = "La identificación del padre no puede estar vacio";
+                        return false;
+                    }
+                    if (formulario == string.Empty)
+                    {
+                        strError = "Olvidó enviar el nombre del formulario";
+                        return false;
+                    }
+                    break;
+                case "eliminarOpe":
+                    if (strIdentificacion == string.Empty)
+                    {
+                        strError = "La identificación no puede estar vacia";
+                        return false;
+                    }
+                    if (formulario == string.Empty)
+                    {
+                        strError = "Olvidó enviar el nombre del formulario";
+                        return false;
+                    }
+                    break;
+                case "consultarUsuarioOpe":
+                    goto case "eliminarOpe";
             }
             return true;
-
         }
 
         private bool llenarGrid(DataTable dtDatos)
@@ -124,6 +270,10 @@ namespace libEscuelaOpe
         {
             try
             {
+                if (!validar("consConex"))
+                {
+                    return false;
+                }
                 clsUsuariosRN objConsRn = new clsUsuariosRN(strNombreApp);
 
                 if (!objConsRn.consConex())
@@ -133,7 +283,7 @@ namespace libEscuelaOpe
                 }
                 if (objConsRn.DatosRptaBd.Tables[0].Rows.Count == 0)
                 {
-                    strError = "No hay conexion";
+                    strError = "Desconectado";
                     return false;
                 }
                 strNombre = objConsRn.DatosRptaBd.Tables[0].Rows[0]["nombre"].ToString();
@@ -146,8 +296,8 @@ namespace libEscuelaOpe
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                strError = ex.Message;
+                return false;
             }
         }
 
@@ -187,7 +337,8 @@ namespace libEscuelaOpe
             }
             catch (Exception ex)
             {
-                throw ex;
+                strError = ex.Message;
+                return false;
             }
         }
 
@@ -238,7 +389,102 @@ namespace libEscuelaOpe
             }
             catch (Exception ex)
             {
-                throw ex;
+                strError = ex.Message;
+                return false;
+            }
+        }
+
+        public bool modificarOpe()
+        {
+            try
+            {
+                if (!validar("modificarOpe"))
+                {
+                    return false;
+                }
+                clsUsuariosRN objRn = new clsUsuariosRN(this.strNombreApp , formulario);
+
+                objRn.Identificacion = strIdentificacion;
+                objRn.NombreUsuario = strNombreUsuario;
+                objRn.Email = strEmail;
+                objRn.Contrasena = strContrasena;
+                objRn.Nombre = strNombre;
+                objRn.Apellido = strApellido;
+                objRn.FechaNacimiento = strFechaNacimiento;
+                objRn.Telefono = strTelefono;
+                objRn.IdentPadre = strIdentPadre;
+
+                if (!objRn.modificarUsuario())
+                {
+                    strError = objRn.Error;
+                    objRn = null;
+                    return false;
+                }
+                if (objRn.DatosRptaBd.Tables[0].Rows[0]["CodRpta"].ToString() == "1")
+                {
+                    strError = objRn.DatosRptaBd.Tables[0].Rows[0]["Mensaje"].ToString();
+                    objRn = null;
+                    return false;
+                }
+                if (objRn.DatosRptaBd.Tables.Count > 1)
+                {
+                    if (!llenarGrid(objRn.DatosRptaBd.Tables[1]))
+                    {
+                        objRn = null;
+                        return false;
+                    }
+                }
+                strMensaje = objRn.DatosRptaBd.Tables[0].Rows[0]["Mensaje"].ToString();
+                objRn = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                strError = ex.Message;
+                return false;
+            }
+        }
+
+        public bool eliminarOpe()
+        {
+            try
+            {
+                if (!validar("eliminarOpe"))
+                {
+                    return false;
+                }
+                clsUsuariosRN objRn = new clsUsuariosRN(this.strNombreApp, formulario);
+
+                objRn.Identificacion = strIdentificacion;
+
+                if (!objRn.eliminarUsuario())
+                {
+                    strError = objRn.Error;
+                    objRn = null;
+                    return false;
+                }
+                if (objRn.DatosRptaBd.Tables[0].Rows[0]["CodRpta"].ToString() == "1")
+                {
+                    strError = objRn.DatosRptaBd.Tables[0].Rows[0]["Mensaje"].ToString();
+                    objRn = null;
+                    return false;
+                }
+                if (objRn.DatosRptaBd.Tables.Count > 1)
+                {
+                    if (!llenarGrid(objRn.DatosRptaBd.Tables[1]))
+                    {
+                        objRn = null;
+                        return false;
+                    }
+                }
+                strMensaje = objRn.DatosRptaBd.Tables[0].Rows[0]["Mensaje"].ToString();
+                objRn = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                strError = ex.Message;
+                return false;
             }
         }
 
@@ -269,7 +515,8 @@ namespace libEscuelaOpe
             }
             catch (Exception ex)
             {
-                throw ex;
+                strError = ex.Message;
+                return false;
             }
         }
 
@@ -313,7 +560,7 @@ namespace libEscuelaOpe
                 }
                 if (objRn.DatosRptaBd.Tables[1].Columns.Contains("id_rol"))
                 {
-
+                    strRol = objRn.DatosRptaBd.Tables[1].Rows[0]["id_rol"].ToString();
                 }
                 strMensaje = objRn.DatosRptaBd.Tables[0].Rows[0]["Mensaje"].ToString();
                 objRn = null;
@@ -321,7 +568,32 @@ namespace libEscuelaOpe
             }
             catch (Exception ex)
             {
-                throw ex;
+                strError = ex.Message;
+                return false;
+            }
+        }
+
+        public bool cerrarSesion()
+        {
+            try
+            {
+                if (!validar("cerrarSesion"))
+                {
+                    return false;
+                }
+                clsUsuariosRN objConsRn = new clsUsuariosRN(strNombreApp);
+
+                if (!objConsRn.cerrarSesion())
+                {
+                    objConsRn = null;
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                strError = ex.Message;
+                return false;
             }
         }
 

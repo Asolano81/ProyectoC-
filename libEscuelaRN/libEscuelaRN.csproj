@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsGruposRN.cs" />
+    <Compile Include="clsMatriculasRN.cs" />
     <Compile Include="clsRolesRN.cs" />
     <Compile Include="clsUsuariosRN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

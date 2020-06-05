@@ -62,15 +62,15 @@ constraint fk_deporte_escenario  foreign key(deporte_id) references deportes(id)
 create table matriculas(
 id int primary key identity not null,
 fecha varchar(50),
-aprobada bit,
+aprobada varchar(20),
 estudiante_id int not null,
 constraint fk_matricula_usuario  foreign key(estudiante_id) references usuarios(id)
 );
 
-create table deporte_matricula(
-deporte_id int not null,
+create table grupo_matricula(
+grupo_id int not null,
 matricula_id int not null,
-constraint fk_matricula_deporte  foreign key(deporte_id) references deportes(id),
+constraint fk_matricula_grupos  foreign key(grupo_id) references grupos(id),
 constraint fk_matricula_matriculas  foreign key(matricula_id) references matriculas(id)
 );
 
@@ -157,9 +157,9 @@ BEGIN
 			WHERE rol_usuario.rol_id = 3
 		END
 END
+GO
 
 /*Consulta Conexion*/
-
 CREATE PROCEDURE [dbo].[SP_ConsultarConexion] AS	
 		SELECT * FROM conexion
 GO
@@ -190,7 +190,6 @@ AS
 		   'Datos incorrectos por favor validar registro' AS Mensaje		
 	END
 GO
-
 
 CREATE PROCEDURE [dbo].[SP_CrearUsuarios]
 @nombre_usuario varchar(50),				
@@ -309,7 +308,6 @@ END
 GO
 
 /*Eliminar Grupo*/
-
 CREATE PROCEDURE [dbo].[SP_EliminarGrupo]
 @Descripcion VARCHAR(20)
 AS

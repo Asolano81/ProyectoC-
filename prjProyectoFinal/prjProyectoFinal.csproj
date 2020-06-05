@@ -71,6 +71,7 @@
     <Content Include="css\bootstrap-theme.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\Practica4.css" />
+    <Content Include="frmAdminRoles.aspx" />
     <Content Include="frmGestGrupo.aspx" />
     <Content Include="frmGestHijo.aspx" />
     <Content Include="frmGestUsuario.aspx" />
@@ -95,6 +96,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmAdminRoles.aspx.cs">
+      <DependentUpon>frmAdminRoles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmAdminRoles.aspx.designer.cs">
+      <DependentUpon>frmAdminRoles.aspx</DependentUpon>
+    </Compile>
     <Compile Include="frmGestGrupo.aspx.cs">
       <DependentUpon>frmGestGrupo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

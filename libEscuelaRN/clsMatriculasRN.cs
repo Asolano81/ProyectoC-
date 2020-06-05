@@ -12,47 +12,41 @@ using libLlenarCombos;
 
 namespace libEscuelaRN
 {
-    public class clsGruposRN
+    public class clsMatriculasRN
     {
         #region "Atributos"
         private string strTipoCons;
         private string strNombreApp;
-        private string strDescripcion;
-        private string strHoraIn;
-        private string strHoraFin;
-        private string strDia;
+        private string strIdentEstu;
+        private string strFechDeMatr;
         private int intIdDeporte;
         private int intIdProfesor;
+        private int intIdGrupo;
+        private int intIdGrupoViejo;
         private string strError;
-        private SqlParameter[] objDatosGrupo;
+        private SqlParameter[] objDatosMatricula;
         private clsConexionBd objConex;
         private clsLlenarGrids objLlenaGrids;
         private DataSet dsDatos;
         #endregion
 
         #region "Constructor"
-        public clsGruposRN(string nombreApp)
+        public clsMatriculasRN(string nombreApp)
         {
             this.strNombreApp = nombreApp;
             strError = string.Empty;
-            strDescripcion = string.Empty;
-            strHoraIn = string.Empty;
-            strHoraFin = string.Empty;
-            strDia = string.Empty;
-            intIdDeporte = -1;
-            intIdProfesor = -1;
         }
         #endregion
 
         #region "Propiedades"        
         public string Error { get => strError; }
         public DataSet DatosRptaBd { get => dsDatos; }
-        public string Descripcion {set => strDescripcion = value; }
-        public string HoraIn {set => strHoraIn = value; }
-        public string HoraFin {set => strHoraFin = value; }
-        public string Dia {set => strDia = value; }
-        public int IdDeporte {set => intIdDeporte = value; }
-        public int IdProfesor {set => intIdProfesor = value; }
+        public string IdentEstu { set => strIdentEstu = value; }
+        public string FechDeMatr { set => strFechDeMatr = value; }
+        public int IdDeporte { set => intIdDeporte = value; }
+        public int IdProfesor { set => intIdProfesor = value; }
+        public int IdGrupo {set => intIdGrupo = value; }
+        public int IdGrupoViejo { set => intIdGrupoViejo = value; }
         #endregion
 
         #region "Métodos Privados"
@@ -65,44 +59,69 @@ namespace libEscuelaRN
             }
             switch (metodoOrigen)
             {
-                case "registrar":
-                    if (strDescripcion == string.Empty)
+                case "registrarOpe":
+                    if (strIdentEstu == string.Empty)
                     {
-                        strError = "La descripcion del grupo no puede estar vacia";
+                        strError = "La identificación del estudiante no puede estar vacia";
                         return false;
                     }
-                    if (strHoraIn == string.Empty)
+                    if (strFechDeMatr == string.Empty)
                     {
-                        strError = "La fecha inicio no puede estar vacia";
-                        return false;
-                    }
-                    if (strDia == string.Empty)
-                    {
-                        strError = "El día no puede estar vacio";
+                        strError = "La fecha no puede estar vacia";
                         return false;
                     }
                     if (intIdDeporte <= 0)
                     {
-                        strError = "Debe seleccionar un deporte";
+                        strError = "Debe seleccionar un deporte para la matricula para la matrícula";
                         return false;
                     }
-                    if (intIdProfesor <= 0)
+                    if (intIdGrupo <= 0)
                     {
-                        strError = "Debe seleccionar un profesor";
+                        strError = "Debe seleccionar un deporte para la matricula para la matrícula";
                         return false;
                     }
                     break;
-                case "consultarGrupo":
-                    if (strDescripcion == string.Empty)
+                case "consultarMatricula":
+                    if (strIdentEstu == string.Empty)
                     {
-                        strError = "La descripcion del grupo no puede estar vacia";
+                        strError = "La identificación del estudiante no puede estar vacia";
+                        return false;
+                    }
+                    if (intIdDeporte <= 0)
+                    {
+                        strError = "Debe seleccionar un deporte para la matricula para la matrícula";
                         return false;
                     }
                     break;
-                case "modificarGrupo":
-                    goto case "registrar";
-                case "eliminarOpe":
-                    goto case "consultarGrupo";
+                case "modificarMatricula":
+                    if (strIdentEstu == string.Empty)
+                    {
+                        strError = "La identificación del estudiante no puede estar vacia";
+                        return false;
+                    }
+                    if (intIdGrupo <= 0)
+                    {
+                        strError = "Debe seleccionar un deporte para la matricula para la matrícula";
+                        return false;
+                    }
+                    if (intIdGrupoViejo == intIdGrupo)
+                    {
+                        strError = "Esta seleccionando el mismo grupo, si dedesa modificarlo elija uno diferente";
+                        return false;
+                    }
+                    break;
+                case "eliminarDeporteMatri":
+                    if (strIdentEstu == string.Empty)
+                    {
+                        strError = "La identificación del estudiante no puede estar vacia";
+                        return false;
+                    }
+                    if (intIdGrupo <= 0)
+                    {
+                        strError = "Debe seleccionar un deporte para la matricula para la matrícula";
+                        return false;
+                    }
+                    break;
             }
 
             return true;
@@ -120,26 +139,33 @@ namespace libEscuelaRN
                 switch (metodoOrigen.ToLower())
                 {
                     case "registrarope":
-                        objDatosGrupo = new SqlParameter[6];
-                        objDatosGrupo[0] = new SqlParameter("@Descripcion", strDescripcion);
-                        objDatosGrupo[1] = new SqlParameter("@HoraIn", strHoraIn);
-                        objDatosGrupo[2] = new SqlParameter("@HoraFin", strHoraFin);
-                        objDatosGrupo[3] = new SqlParameter("@Dia", strDia);
-                        objDatosGrupo[4] = new SqlParameter("@Id_Deporte", intIdDeporte);
-                        objDatosGrupo[5] = new SqlParameter("@Id_Profesor", intIdProfesor);
+                        objDatosMatricula = new SqlParameter[4];
+                        objDatosMatricula[0] = new SqlParameter("@DocEstudiante", strIdentEstu);
+                        objDatosMatricula[1] = new SqlParameter("@Fecha", strFechDeMatr);
+                        objDatosMatricula[2] = new SqlParameter("@IdGrupo", intIdGrupo);
+                        objDatosMatricula[3] = new SqlParameter("@IdDeporte", intIdDeporte);
                         break;
                     case "llenardropdowns":
-                        objDatosGrupo = new SqlParameter[1];
-                        objDatosGrupo[0] = new SqlParameter("@TipoConsulta", strTipoCons);
+                        objDatosMatricula = new SqlParameter[2];
+                        objDatosMatricula[0] = new SqlParameter("@TipoConsulta", strTipoCons);
+                        objDatosMatricula[1] = new SqlParameter("@IdDeporte", intIdDeporte);
                         break;
-                    case "consgrupo":
-                        objDatosGrupo = new SqlParameter[1];
-                        objDatosGrupo[0] = new SqlParameter("@Descripcion", strDescripcion);
+                    case "consultarmatricula":
+                        objDatosMatricula = new SqlParameter[2];
+                        objDatosMatricula[0] = new SqlParameter("@DocEstudiante", strIdentEstu);
+                        objDatosMatricula[1] = new SqlParameter("@IdDeporte", intIdDeporte);
                         break;
-                    case "modificargrupo":
-                        goto case "registrarope";
-                    case "eliminargrupo":
-                        goto case "consgrupo";
+                    case "modificarmatricula":
+                        objDatosMatricula = new SqlParameter[3];
+                        objDatosMatricula[0] = new SqlParameter("@DocEstudiante", strIdentEstu);
+                        objDatosMatricula[1] = new SqlParameter("@IdGrupoViejo", intIdGrupoViejo);
+                        objDatosMatricula[2] = new SqlParameter("@IdGrupoNuevo", intIdGrupo);
+                        break; 
+                    case "eliminardeportematri":
+                        objDatosMatricula = new SqlParameter[2];
+                        objDatosMatricula[0] = new SqlParameter("@DocEstudiante", strIdentEstu);
+                        objDatosMatricula[1] = new SqlParameter("@IdGrupo", intIdGrupo);
+                        break;
                 }
                 return true;
             }
@@ -166,10 +192,20 @@ namespace libEscuelaRN
                         strCampoId = "id";
                         strCampoTexto = "descripcion";
                         break;
-                    case "ddlProfesor":
-                        strTipoCons = "PROFESORES";
+                    case "ddlGrupo":
+                        strTipoCons = "GRUPOS";
                         strCampoId = "id";
-                        strCampoTexto = "nom_profesor";
+                        strCampoTexto = "descripcion_grupo";
+                        break;
+                    case "ddlDocente":
+                        strTipoCons = "DOCENTES";
+                        strCampoId = "Id";
+                        strCampoTexto = "Docente";
+                        break;
+                    case "ddlAula":
+                        strTipoCons = "AULAS";
+                        strCampoId = "Id";
+                        strCampoTexto = "Aula";
                         break;
                     default:
                         strError = "Control desconocido";
@@ -181,10 +217,10 @@ namespace libEscuelaRN
                 }
                 clsLlenarCombos objLlenar = new clsLlenarCombos(strNombreApp);
 
-                objLlenar.SQL = "SP_ConsultarComboGrupos";
+                objLlenar.SQL = "[SP_ConsultarComboMatriculas]";
                 objLlenar.CampoID = strCampoId;
                 objLlenar.CampoTexto = strCampoTexto;
-                objLlenar.ParametrosSQL = objDatosGrupo;
+                objLlenar.ParametrosSQL = objDatosMatricula;
 
                 if (!objLlenar.llenarComboWeb(ddlGen))
                 {
@@ -212,8 +248,8 @@ namespace libEscuelaRN
                 }
 
                 objConex = new clsConexionBd(strNombreApp);
-                objConex.SQL = "[SP_CrearGrupo]";
-                objConex.ParametrosSQL = objDatosGrupo;
+                objConex.SQL = "[SP_RegistrarMatricula]";
+                objConex.ParametrosSQL = objDatosMatricula;
 
                 if (!objConex.llenarDataSet(true, true))
                 {
@@ -234,18 +270,18 @@ namespace libEscuelaRN
             }
         }
 
-        public bool modificarGrupo()
+        public bool modificarMatricula()
         {
             try
             {
-                if (!agregarParam("modificarGrupo"))
+                if (!agregarParam("modificarMatricula"))
                 {
                     return false;
                 }
                 clsConexionBd objCnx = new clsConexionBd(strNombreApp);
 
-                objCnx.SQL = "[SP_ModificarGrupo]";
-                objCnx.ParametrosSQL = objDatosGrupo;
+                objCnx.SQL = "[SP_ModificarMatricula]";
+                objCnx.ParametrosSQL = objDatosMatricula;
 
                 if (!objCnx.llenarDataSet(true, true))
                 {
@@ -266,18 +302,18 @@ namespace libEscuelaRN
             }
         }
 
-        public bool eliminarGrupo()
+        public bool eliminarDeporteMatri()
         {
             try
             {
-                if (!agregarParam("eliminarGrupo"))
+                if (!agregarParam("eliminarDeporteMatri"))
                 {
                     return false;
                 }
                 clsConexionBd objCnx = new clsConexionBd(strNombreApp);
 
-                objCnx.SQL = "[SP_EliminarGrupo]";
-                objCnx.ParametrosSQL = objDatosGrupo;
+                objCnx.SQL = "[SP_EliminarDeporteMatri]";
+                objCnx.ParametrosSQL = objDatosMatricula;
 
                 if (!objCnx.llenarDataSet(true, true))
                 {
@@ -298,13 +334,18 @@ namespace libEscuelaRN
             }
         }
 
-        public bool cargarGrupo()
+        public bool cargarMatriculas()
         {
             try
             {
+                if (!agregarParam("cargarMatriculas"))
+                {
+                    return false;
+                }
+
                 objConex = new clsConexionBd(strNombreApp);
-                objConex.SQL = "[SP_CargarGrupos]";
-                objConex.ParametrosSQL = objDatosGrupo;
+                objConex.SQL = "[SP_CargarMatriculas]";
+                objConex.ParametrosSQL = objDatosMatricula;
 
                 if (!objConex.llenarDataSet(false, true))
                 {
@@ -325,18 +366,18 @@ namespace libEscuelaRN
             }
         }
 
-        public bool consultarGrupo()
+        public bool consultarMatricula()
         {
             try
             {
-                if (!agregarParam("consGrupo"))
+                if (!agregarParam("consultarMatricula"))
                 {
                     return false;
                 }
                 clsConexionBd objCnx = new clsConexionBd(strNombreApp);
 
-                objCnx.SQL = "[SP_ConsultarGrupo]";
-                objCnx.ParametrosSQL = objDatosGrupo;
+                objCnx.SQL = "[SP_ConsultarMatricula]";
+                objCnx.ParametrosSQL = objDatosMatricula;
 
                 if (!objCnx.llenarDataSet(true, true))
                 {

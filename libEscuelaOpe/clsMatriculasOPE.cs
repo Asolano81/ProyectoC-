@@ -7,20 +7,18 @@ using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using libEscuelaRN;
 using libLlenarGrids;
-
 namespace libEscuelaOpe
 {
-    public class clsGruposOPE
+    public class clsMatriculasOPE
     {
         #region "Atributos"
         private string strNombreApp;
-        private string strDescripcion;
-        private string strHoraIn;
-        private string strHoraFin;
-        private string strDia;
+        private string strIdentEstu;
+        private string strFechDeMatr;
         private int intIdDeporte;
         private int intIdProfesor;
-        private string strNomProf;
+        private int intIdGrupo;
+        private int intIdGrupoViejo;
         private string strError;
         private DataSet dsDatos;
         private string strMensaje;
@@ -29,19 +27,18 @@ namespace libEscuelaOpe
         #endregion
 
         #region "Constructor"
-        public clsGruposOPE(string nombreApp)
+        public clsMatriculasOPE(string nombreApp)
         {
             this.strNombreApp = nombreApp;
             strError = string.Empty;
-            strDescripcion = string.Empty; 
-            strHoraIn = string.Empty;
-            strHoraFin = string.Empty;
-            strDia = string.Empty;
+            strIdentEstu = string.Empty;
+            strFechDeMatr = string.Empty;
             intIdDeporte = -1;
             intIdProfesor = -1;
-            strNomProf = string.Empty;
+            intIdGrupo = -1;
+            intIdGrupoViejo = -1;
             strMensaje = string.Empty;
-    }
+        }
         #endregion
 
         #region "Propiedades"
@@ -50,13 +47,12 @@ namespace libEscuelaOpe
         public string Mensaje { get => strMensaje; }
         public DropDownList DdlGen { set => ddlGen = value; }
         public GridView GvGen { set => gvGen = value; }
-        public string Descripcion { get => strDescripcion; set => strDescripcion = value; }
-        public string HoraIn { get => strHoraIn; set => strHoraIn = value; }
-        public string HoraFin { get => strHoraFin; set => strHoraFin = value; }
-        public string Dia { get => strDia; set => strDia = value; }
-        public string NomProf { get => strNomProf; set => strNomProf = value; }
+        public string IdentEstu { get => strIdentEstu; set => strIdentEstu = value; }
+        public string FechDeMatr { get => strFechDeMatr; set => strFechDeMatr = value; }
         public int IdDeporte { get => intIdDeporte; set => intIdDeporte = value; }
         public int IdProfesor { get => intIdProfesor; set => intIdProfesor = value; }
+        public int IdGrupo { get => intIdGrupo; set => intIdGrupo = value; }
+        public int IdGrupoViejo { set => intIdGrupoViejo = value; }
         #endregion
 
         #region "Métodos Privados"
@@ -70,43 +66,68 @@ namespace libEscuelaOpe
             switch (metodoOrigen)
             {
                 case "registrarOpe":
-                    if (strDescripcion == string.Empty)
+                    if (strIdentEstu == string.Empty)
                     {
-                        strError = "La descripcion del grupo no puede estar vacia";
+                        strError = "La identificación del estudiante no puede estar vacia";
                         return false;
                     }
-                    if (strHoraIn == string.Empty)
+                    if (strFechDeMatr == string.Empty)
                     {
-                        strError = "La fecha inicio no puede estar vacia";
-                        return false;
-                    }
-                    if (strDia == string.Empty)
-                    {
-                        strError = "El día no puede estar vacio";
+                        strError = "La fecha no puede estar vacia";
                         return false;
                     }
                     if (intIdDeporte <= 0)
                     {
-                        strError = "Debe seleccionar un deporte";
+                        strError = "Debe seleccionar un deporte para la matricula para la matrícula";
                         return false;
                     }
-                    if (intIdProfesor <= 0)
+                    if (intIdGrupo <= 0)
                     {
-                        strError = "Debe seleccionar un profesor";
+                        strError = "Debe seleccionar un deporte para la matricula para la matrícula";
                         return false;
                     }
                     break;
-                case "consultarGrupoConParOpe":
-                    if (strDescripcion == string.Empty)
+                case "consultarMatriculaOpe":
+                    if (strIdentEstu == string.Empty)
                     {
-                        strError = "La descripcion del grupo no puede estar vacia";
+                        strError = "La identificación del estudiante no puede estar vacia";
+                        return false;
+                    }
+                    if (intIdDeporte <= 0)
+                    {
+                        strError = "Debe seleccionar un deporte para la matricula para la matrícula";
                         return false;
                     }
                     break;
                 case "modificarOpe":
-                    goto case "registrarOpe";
+                    if (strIdentEstu == string.Empty)
+                    {
+                        strError = "La identificación del estudiante no puede estar vacia";
+                        return false;
+                    }
+                    if (intIdGrupo <= 0)
+                    {
+                        strError = "Debe seleccionar un deporte para la matricula para la matrícula";
+                        return false;
+                    }
+                    if (intIdGrupoViejo == intIdGrupo)
+                    {
+                        strError = "Esta seleccionando el mismo grupo, si dedesa modificarlo elija uno diferente";
+                        return false;
+                    }
+                    break;
                 case "eliminarOpe":
-                    goto case "consultarGrupoConParOpe";
+                    if (strIdentEstu == string.Empty)
+                    {
+                        strError = "La identificación del estudiante no puede estar vacia";
+                        return false;
+                    }
+                    if (intIdGrupo <= 0)
+                    {
+                        strError = "Debe seleccionar un deporte para la matricula para la matrícula";
+                        return false;
+                    }
+                    break;
             }
 
             return true;
@@ -134,6 +155,7 @@ namespace libEscuelaOpe
             }
             catch (Exception ex)
             {
+
                 strError = ex.Message;
                 return false;
             }
@@ -151,7 +173,15 @@ namespace libEscuelaOpe
                     return false;
                 }
 
-                clsGruposRN objRn = new clsGruposRN(strNombreApp);
+                clsMatriculasRN objRn = new clsMatriculasRN(strNombreApp);
+
+                switch (ddlGen.ID.ToLower())
+                {
+                    case "ddlgrupo":
+                        objRn.IdDeporte = intIdDeporte;
+                        break;
+                }
+
                 if (!objRn.llenarDropDowns(ddlGen))
                 {
                     strError = objRn.Error;
@@ -176,14 +206,12 @@ namespace libEscuelaOpe
                 {
                     return false;
                 }
-                clsGruposRN objRn = new clsGruposRN(this.strNombreApp);
+                clsMatriculasRN objRn = new clsMatriculasRN(this.strNombreApp);
 
-                objRn.Descripcion = strDescripcion;
-                objRn.HoraIn = strHoraIn;
-                objRn.HoraFin = strHoraFin;
-                objRn.Dia = strDia;
+                objRn.IdentEstu = strIdentEstu;
+                objRn.FechDeMatr = strFechDeMatr;
+                objRn.IdGrupo = intIdGrupo;
                 objRn.IdDeporte = intIdDeporte;
-                objRn.IdProfesor = intIdProfesor;
 
                 if (!objRn.registrar())
                 {
@@ -224,16 +252,13 @@ namespace libEscuelaOpe
                 {
                     return false;
                 }
-                clsGruposRN objRn = new clsGruposRN(this.strNombreApp);
+                clsMatriculasRN objRn = new clsMatriculasRN(this.strNombreApp);
 
-                objRn.Descripcion = strDescripcion;
-                objRn.HoraIn = strHoraIn;
-                objRn.HoraFin = strHoraFin;
-                objRn.Dia = strDia;
-                objRn.IdDeporte = intIdDeporte;
-                objRn.IdProfesor = intIdProfesor;
+                objRn.IdentEstu = strIdentEstu;
+                objRn.IdGrupo = intIdGrupo;
+                objRn.IdGrupoViejo = intIdGrupoViejo;
 
-                if (!objRn.modificarGrupo())
+                if (!objRn.modificarMatricula())
                 {
                     strError = objRn.Error;
                     objRn = null;
@@ -272,11 +297,12 @@ namespace libEscuelaOpe
                 {
                     return false;
                 }
-                clsGruposRN objRn = new clsGruposRN(this.strNombreApp);
+                clsMatriculasRN objRn = new clsMatriculasRN(this.strNombreApp);
 
-                objRn.Descripcion = strDescripcion;
+                objRn.IdentEstu = strIdentEstu;
+                objRn.IdGrupo = intIdGrupo;
 
-                if (!objRn.eliminarGrupo())
+                if (!objRn.eliminarDeporteMatri())
                 {
                     strError = objRn.Error;
                     objRn = null;
@@ -307,17 +333,58 @@ namespace libEscuelaOpe
             }
         }
 
-        public bool cargarGrupoOpe()
+        public bool consultarMatriculaOpe()
         {
             try
             {
-                if (!validar("cargarGrupoOpe"))
+                if (!validar("consultarMatriculaOpe"))
                 {
                     return false;
                 }
-                clsGruposRN objRn = new clsGruposRN(this.strNombreApp);
+                clsMatriculasRN objRn = new clsMatriculasRN(this.strNombreApp);
 
-                if (!objRn.cargarGrupo())
+                objRn.IdentEstu = strIdentEstu;
+                objRn.IdDeporte = intIdDeporte;
+
+                if (!objRn.consultarMatricula())
+                {
+                    strError = objRn.Error;
+                    objRn = null;
+                    return false;
+                }
+
+                if (objRn.DatosRptaBd.Tables[0].Rows[0]["CodRpta"].ToString() == "1")
+                {
+                    strError = objRn.DatosRptaBd.Tables[0].Rows[0]["Mensaje"].ToString();
+                    objRn = null;
+                    return false;
+                }
+
+                intIdGrupo = Convert.ToInt32(objRn.DatosRptaBd.Tables[1].Rows[0]["id_grupo"].ToString());
+                strFechDeMatr = objRn.DatosRptaBd.Tables[1].Rows[0]["fecha_matricula"].ToString();
+                strMensaje = objRn.DatosRptaBd.Tables[0].Rows[0]["Mensaje"].ToString();
+
+                objRn = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                strMensaje =  ex.Message.ToString();
+                return false;
+            }
+        }
+
+        public bool cargarMatriculasOpe()
+        {
+            try
+            {
+                if (!validar("cargarMatriculasOpe"))
+                {
+                    return false;
+                }
+                clsMatriculasRN objRn = new clsMatriculasRN(this.strNombreApp);
+
+                if (!objRn.cargarMatriculas())
                 {
                     strError = objRn.Error;
                     objRn = null;
@@ -336,47 +403,6 @@ namespace libEscuelaOpe
             {
                 strError = ex.Message;
                 return false;
-            }
-        }
-
-        public bool consultarGrupoConParOpe()
-        {
-            try
-            {
-                if (!validar("consultarGrupoConParOpe"))
-                {
-                    return false;
-                }
-                clsGruposRN objRn = new clsGruposRN(this.strNombreApp);
-
-                objRn.Descripcion = strDescripcion;
-
-                if (!objRn.consultarGrupo())
-                {
-                    strError = objRn.Error;
-                    objRn = null;
-                    return false;
-                }
-
-                if (objRn.DatosRptaBd.Tables[0].Rows.Count == 0)
-                {
-                    strError = "El grupo no existe";
-                    return false;
-                }
-                strDescripcion = objRn.DatosRptaBd.Tables[0].Rows[0]["descripcion_grupo"].ToString();
-                strHoraIn = objRn.DatosRptaBd.Tables[0].Rows[0]["hora_inicio"].ToString();
-                strHoraFin = objRn.DatosRptaBd.Tables[0].Rows[0]["hora_fin"].ToString();
-                strDia = objRn.DatosRptaBd.Tables[0].Rows[0]["dia"].ToString();
-                intIdDeporte = Convert.ToInt32(objRn.DatosRptaBd.Tables[0].Rows[0]["deporte_id"].ToString());
-                intIdProfesor = Convert.ToInt32(objRn.DatosRptaBd.Tables[0].Rows[0]["profesor_id"].ToString());
-                strNomProf = objRn.DatosRptaBd.Tables[0].Rows[0]["nombre"].ToString();
-                objRn = null;
-                return true;
-            }
-            catch (Exception ex)
-            {
-                strError = ex.Message;
-                return false; 
             }
         }
 
