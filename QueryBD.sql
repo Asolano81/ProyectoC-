@@ -741,5 +741,139 @@ AS
 	END
 GO
 
+/*Cambios de ConsultarMatricula*/
+CREATE PROCEDURE [dbo].[SP_ConsultarMatricula] 
+@DocEstudiante VARCHAR(20),
+@IdDeporte int
+AS
+	DECLARE @encargado VARCHAR(50)
+	SET @encargado = (select [rol] from conexion)
+
+	IF @encargado='Director'
+	BEGIN
+		IF NOT EXISTS (SELECT usuario_id as id_usuario
+										from usuarios as us 
+										join rol_usuario as rs on rs.usuario_id = us.id 
+										join roles as ro on ro.id = rs.rol_id
+										WHERE identificacion = @DocEstudiante AND ro.descripcion='Estudiante')
+		BEGIN
+			SELECT '1' AS CodRpta,
+			'El documento del Estudiante ingresado no existe' AS Mensaje
+		RETURN
+		END
+	END
+
+	DECLARE @IdEstudiante VARCHAR(3)
+	SET @IdEstudiante = (select [id] from usuarios WHERE identificacion=@DocEstudiante)
+
+	IF EXISTS (SELECT gr.id as id_grupo
+				from matriculas as mt 
+				join usuarios as us on us.id = mt.estudiante_id
+				join grupo_matricula as gm on gm.matricula_id = mt.id
+				join grupos as gr on gr.id = gm.grupo_id 
+				join deportes as dp on dp.id = gr.deporte_id
+				WHERE us.id = @IdEstudiante AND  dp.id = @IdDeporte)
+	BEGIN
+		SELECT '0' AS CodRpta,
+				'Consulta Exitosa' AS Mensaje
+		SELECT gr.id as id_grupo, mt.fecha as fecha_matricula
+				from matriculas as mt 
+				join usuarios as us on us.id = mt.estudiante_id
+				join grupo_matricula as gm on gm.matricula_id = mt.id
+				join grupos as gr on gr.id = gm.grupo_id 
+				join deportes as dp on dp.id = gr.deporte_id
+				WHERE us.id = @IdEstudiante AND  dp.id = @IdDeporte
+		RETURN
+	END
+	SELECT '0' AS CodRpta,
+				'El estudiante no tiene matriculado ese deporte' AS Mensaje
+GO
+
+/*Eliminar Deporte de Matricula*/
+CREATE PROCEDURE [dbo].[SP_EliminarDeporteMatri]
+@DocEstudiante VARCHAR(50),
+@IdGrupo INT
+
+AS
+BEGIN
+
+	DECLARE @IdEstudiante VARCHAR(50)
+	SET @IdEstudiante = (select [id] from usuarios where identificacion=@DocEstudiante)
+
+	DECLARE @IdMatricula int
+	SET @IdMatricula = (select [id] from matriculas where estudiante_id=@IdEstudiante)
+
+	DELETE FROM grupo_matricula WHERE matricula_id=@IdMatricula AND grupo_id=@IdGrupo
+
+	SELECT '0' AS CodRpta,
+		'Deporte eliminado exitosamente de la matricula' AS Mensaje
+	EXEC SP_CargarMatriculas
+END
+GO
+
+/*Cerrar Sesion*/
+CREATE PROCEDURE [dbo].[SP_CerrarSesion] AS	
+		TRUNCATE TABLE conexion
+GO
+/*Cambios de Consulta los roles de 1 sola persona*/
+CREATE PROCEDURE [dbo].[SP_ConsultarRolDeUs] 
+@Documento VARCHAR(20)
+AS
+	IF NOT EXISTS(SELECT * FROM usuarios WHERE identificacion=@Documento)
+	BEGIN
+		SELECT '1' AS CodRpta,
+			'No existe ningun usuario registrado con el documento ingresado' AS Mensaje
+		RETURN
+	END
+	
+	IF EXISTS (SELECT usuario_id as id_usuario
+										from usuarios as us 
+										join rol_usuario as rs on rs.usuario_id = us.id 
+										join roles as ro on ro.id = rs.rol_id
+										WHERE identificacion = @Documento AND ro.descripcion='Estudiante')
+	BEGIN
+		SELECT '1' AS CodRpta,
+			'No puedes añadirle roles a un Usuario que es estudiante' AS Mensaje
+		RETURN
+	END
+
+	DECLARE @IdUsuario VARCHAR(3)
+	SET @IdUsuario = (select [id] from usuarios WHERE identificacion=@Documento)
+
+	SELECT '0' AS CodRpta,
+				'Consulta Exitosa' AS Mensaje
+
+	SELECT us.identificacion as cedula, us.nombre, us.apellido, ro.descripcion as Roles
+	from usuarios as us 
+	join rol_usuario as rs on rs.usuario_id = us.id 
+	join roles as ro on ro.id = rs.rol_id
+	WHERE identificacion = @Documento
+GO
+/*Añadir roles a una persona*/
+CREATE PROCEDURE[dbo].[SP_AñadirRolUsuario]
+@Documento VARCHAR(20),
+@IdRol INT
+AS
+	
+	IF EXISTS(SELECT ro.descripcion
+				from usuarios as us 
+				join rol_usuario as rs on rs.usuario_id = us.id 
+				join roles as ro on ro.id = rs.rol_id
+				WHERE us.identificacion = @Documento AND ro.id = @IdRol)
+	BEGIN 
+		SELECT '1' AS CodRpta,
+			'El usuario ya posee el Rol solicitado. No es posible registrarlo.' AS Mensaje
+		RETURN
+	END
+
+	DECLARE @IdUsuario VARCHAR(3)
+	SET @IdUsuario = (select [id] from usuarios WHERE identificacion=@Documento)
+
+	INSERT INTO rol_usuario (rol_id, usuario_id) values(@IdRol, @IdUsuario)
+
+	SELECT '0' AS CodRpta,
+			'Rol añadido exitosamente al usuario' AS Mensaje
+	EXEC SP_ConsultarRolDeUs @Documento
+GO
 
 
