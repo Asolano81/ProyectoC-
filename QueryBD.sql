@@ -200,7 +200,14 @@ AS
 	END
 GO	
 	
-
+/*Cargar Usuarios en Director*/
+CREATE PROCEDURE [dbo].[SP_CargarGruposRegistradosEnDirector] AS
+SELECT us.nombre_usuario, us.email, us.contrasena, us.identificacion, us.nombre, us.apellido, us.fecha_nacimiento, us.telefono
+		from usuarios as us 
+		join rol_usuario as rs on rs.usuario_id = us.id 
+		join roles as ro on ro.id = rs.rol_id
+		WHERE ro.descripcion !='Estudiante'
+GO
 
 /*Crear Usuaurio PADRE-PROFESOR-DIRECTOR*/
 CREATE PROCEDURE [dbo].[SP_RegistrarUsuarioDirector] 
@@ -243,16 +250,6 @@ INSERT INTO rol_usuario(usuario_id, rol_id) values (@IdUsuario, @idrol)
 				SELECT '0' AS CodRpta,
 				'El usuario se ha registrado correctamente' AS Mensaje
 	EXEC SP_CargarGruposRegistradosEnDirector
-GO
-
-
-/*Cargar Usuarios en Director*/
-CREATE PROCEDURE [dbo].[SP_CargarGruposRegistradosEnDirector] AS
-SELECT us.nombre_usuario, us.email, us.contrasena, us.identificacion, us.nombre, us.apellido, us.fecha_nacimiento, us.telefono
-		from usuarios as us 
-		join rol_usuario as rs on rs.usuario_id = us.id 
-		join roles as ro on ro.id = rs.rol_id
-		WHERE ro.descripcion !='Estudiante'
 GO
 
 /*Cargar Grupo*/
@@ -613,9 +610,9 @@ BEGIN
 	BEGIN
 		SELECT '0' AS CodRpta,
 			'usuario eliminado exitosamente' AS Mensaje
-		 /*EXEC **CREAR PROCEDIMIENTO SP_CargarEstudiantes*/
+		 EXEC SP_CargarGruposRegistradosEnDirector
 		RETURN
-	END		
+	END	
 END
 GO
 

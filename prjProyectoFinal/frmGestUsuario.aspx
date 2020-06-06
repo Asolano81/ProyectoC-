@@ -73,11 +73,11 @@
                                         <asp:Button ID="btnRegistrar" runat="server" CssClass="btn btn-success" Text="Registrar"  OnClick="btnRegistrar_Click"/>
                                     </asp:Panel>
                                     <asp:Panel ID="pnlModificar" runat="server" Visible="false">
-                                        <asp:Button ID="btnConsultar1" runat="server" CssClass="btn btn-success" Text="Consultar" OnClick="btnConsultar_Click" />
+                                        <asp:Button ID="btnConsultar1" runat="server" CssClass="btn btn-success" Text="Consultar" OnClick="btnConsultar1_Click" />
                                         <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-success" Text="Modificar" Enabled="false" OnClick="btnModificar_Click" />
                                     </asp:Panel>
                                     <asp:Panel ID="pnlEliminar" runat="server" Visible="false">
-                                        <asp:Button ID="btnConsultar2" runat="server" CssClass="btn btn-success" Text="Consultar" OnClick="btnConsultar_Click"  />
+                                        <asp:Button ID="btnConsultar2" runat="server" CssClass="btn btn-success" Text="Consultar" OnClick="btnConsultar2_Click"  />
                                         <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-success" Text="Eliminar" Enabled="false" OnClick="btnEliminar_Click" />
                                     </asp:Panel>
                                     <br />
@@ -101,6 +101,7 @@
                         <div class="row"> 
                             <asp:Label ID="lblInstruccion2" runat="server" CssClass="h5" Text="2. Para modificar o eliminar un usuario debe consultarlo primero con la identificación y el rol"></asp:Label>
                         </div>
+                        <br />
                         <div class="row Centrar-Medio">
                             <asp:Panel ID="pnlMensaje" runat="server" Visible="false">
                                 <div class="input-group">

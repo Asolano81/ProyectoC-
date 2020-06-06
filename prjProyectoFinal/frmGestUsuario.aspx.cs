@@ -64,9 +64,9 @@ namespace prjProyectoFinal
 
         public void inhabilitarControles(string metodo)
         {
-            switch (metodo.ToLower())
+            switch (metodo)
             {
-                case "cbxaccion_selectedindexchanged":
+                case "cbxAccion_SelectedIndexChanged":
                     txtUsuario.Enabled = false;
                     txtEmail.Enabled = false;
                     txtContraseña.Enabled = false;
@@ -119,8 +119,18 @@ namespace prjProyectoFinal
                     btnConsultar2.Enabled = true;
                     btnEliminar.Enabled = false;
                     break;
+                case "btnConsultar2_Click":
+                    txtIdentificacion.Enabled = false;
+                    txtUsuario.Enabled = false;
+                    txtEmail.Enabled = false;
+                    txtContraseña.Enabled = false;
+                    txtNombres.Enabled = false;
+                    txtApellidos.Enabled = false;
+                    txtFecNac.Enabled = false;
+                    txtTelefono.Enabled = false;
+                    break;
                 default:
-                    goto case "cbxaccion_selectedindexchanged";
+                    goto case "cbxAccion_SelectedIndexChanged";
             }
 
         }
@@ -158,6 +168,7 @@ namespace prjProyectoFinal
         {
             ddlRol.Items.RemoveAt(4);
         }
+
         private bool validar(string strMetodoOrigen)
         {
             switch (strMetodoOrigen.ToLower())
@@ -253,13 +264,13 @@ namespace prjProyectoFinal
             return true;
         }
 
-        private void consultar()
+        private bool consultar()
         {
             try
             {
                 if (!validar("consultar"))
                 {
-                    return;
+                    return false;
                 }
 
                 clsUsuariosOPE objUsuario = new clsUsuariosOPE(strNombreAplica, "frmGestUsuario");
@@ -270,7 +281,7 @@ namespace prjProyectoFinal
                 {
                     mostrarMsj(objUsuario.Error);
                     objUsuario = null;
-                    return;
+                    return false;
                 }
                 txtUsuario.Text = objUsuario.NombreUsuario;
                 txtEmail.Text = objUsuario.Email;
@@ -280,12 +291,11 @@ namespace prjProyectoFinal
                 txtApellidos.Text = objUsuario.Apellido;
                 txtFecNac.Text = objUsuario.FechaNacimiento;
                 txtTelefono.Text = objUsuario.Telefono;
-                //ddlRol.Text = objUsuario.Rol.ToString();
                 mostrarMsj(objUsuario.Mensaje);
                 inhabilitarControles("consultar");
                 objUsuario = null;
 
-                return;
+                return true;
             }
             catch (Exception ex)
             {
@@ -333,7 +343,6 @@ namespace prjProyectoFinal
             }
         }
 
-
         private void modificar()
         {
             try
@@ -363,6 +372,7 @@ namespace prjProyectoFinal
                 mostrarMsj(objUsuario.Mensaje);
                 objUsuario = null;
                 limpiarControles();
+                inhabilitarControles("modificar");
                 return;
 
             }
@@ -393,6 +403,7 @@ namespace prjProyectoFinal
                 }
                 mostrarMsj(objUsuario.Mensaje);
                 limpiarControles();
+                inhabilitarControles("eliminar");
                 objUsuario = null;
                 return;
 
@@ -432,13 +443,13 @@ namespace prjProyectoFinal
                     break;
                 case 2:
                     txtIdentificacion.Enabled = true;
-                    ddlRol.Enabled = true;
+                    ddlRol.Enabled = false;
                     pnlModificar.Visible = true;
                     limpiarControles();
                     break;
                 case 3:
                     txtIdentificacion.Enabled = true;
-                    ddlRol.Enabled = true;
+                    ddlRol.Enabled = false;
                     pnlEliminar.Visible = true;
                     limpiarControles();
                     break;
@@ -462,7 +473,16 @@ namespace prjProyectoFinal
         {
             eliminar();
         }
-        protected void btnConsultar_Click(object sender, EventArgs e)
+
+        protected void btnConsultar2_Click(object sender, EventArgs e)
+        {
+            if (consultar())
+            {
+                inhabilitarControles("btnConsultar2_Click");
+            }
+        }
+
+        protected void btnConsultar1_Click(object sender, EventArgs e)
         {
             consultar();
         }
