@@ -134,7 +134,7 @@ INSERT INTO deportes values('Ajedrez');
 CREATE PROCEDURE SP_ConsultarRoles
 AS
 	SELECT id,descripcion FROM roles		
-GO;
+GO
 
 
 /*Consultar Combo Grupo*/
