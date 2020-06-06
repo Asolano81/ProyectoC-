@@ -31,3 +31,19 @@ C:\JOHAN\Desarrollo de Software Empresarial\GIT\ProyectoC-\libEscuelaOpe\obj\Deb
 C:\JOHAN\Desarrollo de Software Empresarial\GIT\ProyectoC-\libEscuelaOpe\obj\Debug\libEscuelaOpe.csproj.CopyComplete
 C:\JOHAN\Desarrollo de Software Empresarial\GIT\ProyectoC-\libEscuelaOpe\obj\Debug\libEscuelaOpe.dll
 C:\JOHAN\Desarrollo de Software Empresarial\GIT\ProyectoC-\libEscuelaOpe\obj\Debug\libEscuelaOpe.pdb
+E:\Proyecto C#\Final\ProyectoC-\libEscuelaOpe\bin\Debug\libEscuelaOpe.dll
+E:\Proyecto C#\Final\ProyectoC-\libEscuelaOpe\bin\Debug\libEscuelaOpe.pdb
+E:\Proyecto C#\Final\ProyectoC-\libEscuelaOpe\bin\Debug\libEscuelaRN.dll
+E:\Proyecto C#\Final\ProyectoC-\libEscuelaOpe\bin\Debug\libConexionBd.dll
+E:\Proyecto C#\Final\ProyectoC-\libEscuelaOpe\bin\Debug\libLlenarCombos.dll
+E:\Proyecto C#\Final\ProyectoC-\libEscuelaOpe\bin\Debug\libLeerParametrosCnx.dll
+E:\Proyecto C#\Final\ProyectoC-\libEscuelaOpe\bin\Debug\libEscuelaRN.pdb
+E:\Proyecto C#\Final\ProyectoC-\libEscuelaOpe\bin\Debug\libLlenarGrids.pdb
+E:\Proyecto C#\Final\ProyectoC-\libEscuelaOpe\bin\Debug\libConexionBd.pdb
+E:\Proyecto C#\Final\ProyectoC-\libEscuelaOpe\bin\Debug\libLlenarCombos.pdb
+E:\Proyecto C#\Final\ProyectoC-\libEscuelaOpe\bin\Debug\libLeerParametrosCnx.pdb
+E:\Proyecto C#\Final\ProyectoC-\libEscuelaOpe\obj\Debug\libEscuelaOpe.csprojAssemblyReference.cache
+E:\Proyecto C#\Final\ProyectoC-\libEscuelaOpe\obj\Debug\libEscuelaOpe.csproj.CoreCompileInputs.cache
+E:\Proyecto C#\Final\ProyectoC-\libEscuelaOpe\obj\Debug\libEscuelaOpe.csproj.CopyComplete
+E:\Proyecto C#\Final\ProyectoC-\libEscuelaOpe\obj\Debug\libEscuelaOpe.dll
+E:\Proyecto C#\Final\ProyectoC-\libEscuelaOpe\obj\Debug\libEscuelaOpe.pdb

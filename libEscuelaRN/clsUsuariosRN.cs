@@ -16,6 +16,7 @@ namespace libEscuelaRN
         private string strContrasena;
         private string strIdentificacion;
         private string strRol;
+        private int intIdRol;
         private string strNombre;
         private string strEmail;
         private string strApellido;
@@ -67,6 +68,7 @@ namespace libEscuelaRN
         public string NombreUsuario { set => strNombreUsuario = value; }
         public string Identificacion { set => strIdentificacion = value; }
         public string Rol { set => strRol = value; }
+        public int IdRol { get => intIdRol; set => intIdRol = value; }
         public string Error { get => strError; }
         public DataSet DatosRptaBd { get => dsDatos; }
         public string Contrasena { set => strContrasena = value; }
@@ -289,6 +291,31 @@ namespace libEscuelaRN
                         objDatosUsuario[0] = new SqlParameter("@formulario", formulario);
                         objDatosUsuario[1] = new SqlParameter("@identificacion", strIdentificacion);
                         break;
+                    case "registrarusuarioopern":
+                        objDatosUsuario = new SqlParameter[9];
+                        objDatosUsuario[0] = new SqlParameter("@nombre_usuario", strNombreUsuario);
+                        objDatosUsuario[1] = new SqlParameter("@email", strEmail);
+                        objDatosUsuario[2] = new SqlParameter("@contrasena", strContrasena);
+                        objDatosUsuario[3] = new SqlParameter("@identificacion", strIdentificacion);
+                        objDatosUsuario[4] = new SqlParameter("@nombre", strNombre);
+                        objDatosUsuario[5] = new SqlParameter("@apellido", strApellido);
+                        objDatosUsuario[6] = new SqlParameter("@Fecha_nacimiento", strFechaNacimiento);
+                        objDatosUsuario[7] = new SqlParameter("@telefono", strTelefono);
+                        objDatosUsuario[8] = new SqlParameter("@idrol", intIdRol);
+                        break;
+                    case "modificarusuarioopern":
+                        objDatosUsuario = new SqlParameter[10];
+                        objDatosUsuario[0] = new SqlParameter("@formulario", formulario);
+                        objDatosUsuario[1] = new SqlParameter("@identificacion", strIdentificacion);
+                        objDatosUsuario[2] = new SqlParameter("@nombre_usuario", strNombreUsuario);
+                        objDatosUsuario[3] = new SqlParameter("@email", strEmail);
+                        objDatosUsuario[4] = new SqlParameter("@contrasena", strContrasena);
+                        objDatosUsuario[5] = new SqlParameter("@nombre", strNombre);
+                        objDatosUsuario[6] = new SqlParameter("@apellido", strApellido);
+                        objDatosUsuario[7] = new SqlParameter("@fecha_nacimiento", strFechaNacimiento);
+                        objDatosUsuario[8] = new SqlParameter("@telefono", strTelefono);
+                        objDatosUsuario[9] = new SqlParameter("@identPadre", "SIN INFO");
+                        break;
                 }
                 return true;
             }
@@ -441,6 +468,71 @@ namespace libEscuelaRN
             }
         }
 
+        public bool registrarUsuarioOpeRN()
+        {
+            try
+            {
+                if (!agregarParam("registrarUsuarioOpeRN"))
+                {
+                    return false;
+                }
+
+                objConex = new clsConexionBd(strNombreApp);
+                objConex.SQL = "[SP_RegistrarUsuarioDirector]";
+                objConex.ParametrosSQL = objDatosUsuario;
+
+                if (!objConex.llenarDataSet(true, true))
+                {
+                    strError = objConex.Error;
+                    objConex.cerrarCnx();
+                    objConex = null;
+                    return false;
+                }
+                dsDatos = objConex.DataSetLleno;
+                objConex.cerrarCnx();
+                objConex = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
+        public bool modificarUsuarioOpeRN()
+        {
+            try
+            {
+                if (!agregarParam("modificarUsuarioOpeRN"))
+                {
+                    return false;
+                }
+                clsConexionBd objCnx = new clsConexionBd(strNombreApp);
+
+                objCnx.SQL = "[SP_ModificarUsuario]";
+                objCnx.ParametrosSQL = objDatosUsuario;
+
+                if (!objCnx.llenarDataSet(true, true))
+                {
+                    strError = objCnx.Error;
+                    objCnx.cerrarCnx();
+                    objCnx = null;
+                    return false;
+                }
+                dsDatos = objCnx.DataSetLleno;
+                objCnx.cerrarCnx();
+                objCnx = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public bool modificarUsuario()
         {
             try
@@ -511,6 +603,34 @@ namespace libEscuelaRN
             {
                 objConex = new clsConexionBd(strNombreApp);
                 objConex.SQL = "[SP_CargarEstudiantes]";
+                objConex.ParametrosSQL = objDatosUsuario;
+
+                if (!objConex.llenarDataSet(false, true))
+                {
+                    strError = objConex.Error;
+                    objConex.cerrarCnx();
+                    objConex = null;
+                    return false;
+                }
+                dsDatos = objConex.DataSetLleno;
+                objConex.cerrarCnx();
+                objConex = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                strError = ex.Message;
+                return false;
+            }
+        }
+
+        public bool cargarUsuarios()
+        {
+            try
+            {
+                objConex = new clsConexionBd(strNombreApp);
+                objConex.SQL = "[SP_CargarGruposRegistradosEnDirector]";
                 objConex.ParametrosSQL = objDatosUsuario;
 
                 if (!objConex.llenarDataSet(false, true))

@@ -36,7 +36,7 @@
                                     <br />
                                     <div class="input-group">
                                         <asp:Label ID="lblContraseña" runat="server" CssClass="input-group-addon" Text="Contraseña"></asp:Label>
-                                        <asp:TextBox ID="txtContraseña" runat="server" CssClass="form-control" TextMode="Password" Enabled="false"></asp:TextBox>
+                                        <asp:TextBox ID="txtContraseña" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                                     </div>
                                     <br />
                                     <div class="input-group">
@@ -66,30 +66,21 @@
                                     <br />
                                     <div class="input-group">
                                         <asp:Label ID="lblRol" runat="server" CssClass="input-group-addon" Text="Rol de Aceeso"></asp:Label>
-                                        <asp:DropDownList ID="ddlRol" runat="server" CssClass="form-control" Enabled="true" AutoPostBack="false"></asp:DropDownList>
+                                        <asp:DropDownList ID="ddlRol" runat="server" CssClass="form-control" Enabled="true" AutoPostBack="true"></asp:DropDownList>
                                     </div>
                                     <br />
                                     <asp:Panel ID="pnlRegistrar" runat="server" Visible="false">
-                                        <asp:Button ID="btnRegistrar" runat="server" CssClass="btn btn-success" Text="Registrar" />
+                                        <asp:Button ID="btnRegistrar" runat="server" CssClass="btn btn-success" Text="Registrar"  OnClick="btnRegistrar_Click"/>
                                     </asp:Panel>
                                     <asp:Panel ID="pnlModificar" runat="server" Visible="false">
-                                        <asp:Button ID="btnConsultar1" runat="server" CssClass="btn btn-success" Text="Consultar" />
-                                        <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-success" Text="Modificar" Enabled="false" />
+                                        <asp:Button ID="btnConsultar1" runat="server" CssClass="btn btn-success" Text="Consultar" OnClick="btnConsultar_Click" />
+                                        <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-success" Text="Modificar" Enabled="false" OnClick="btnModificar_Click" />
                                     </asp:Panel>
                                     <asp:Panel ID="pnlEliminar" runat="server" Visible="false">
-                                        <asp:Button ID="btnConsultar2" runat="server" CssClass="btn btn-success" Text="Consultar" />
-                                        <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-success" Text="Eliminar" Enabled="false" />
+                                        <asp:Button ID="btnConsultar2" runat="server" CssClass="btn btn-success" Text="Consultar" OnClick="btnConsultar_Click"  />
+                                        <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-success" Text="Eliminar" Enabled="false" OnClick="btnEliminar_Click" />
                                     </asp:Panel>
                                     <br />
-                                    <asp:Panel ID="pnlMensaje" runat="server" Visible="false">
-                                        <div class="input-group">
-                                            <div class="col-sm-12">
-                                                <div class="alert alert-danger" role="alert">
-                                                    <asp:Label ID="lblMensajeErrorCargaLista" runat="server"></asp:Label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </asp:Panel>
                                 </div>                         
                             </div>
                         </div>
@@ -110,9 +101,35 @@
                         <div class="row"> 
                             <asp:Label ID="lblInstruccion2" runat="server" CssClass="h5" Text="2. Para modificar o eliminar un usuario debe consultarlo primero con la identificación y el rol"></asp:Label>
                         </div>
+                        <div class="row Centrar-Medio">
+                            <asp:Panel ID="pnlMensaje" runat="server" Visible="false">
+                                <div class="input-group">
+                                    <div class="alert alert-info" role="alert">
+                                        <asp:Label ID="lblMensajeError" runat="server"></asp:Label>
+                                    </div>
+                                </div>
+                            </asp:Panel>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div> 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title Centrar-Medio">Usuarios Registrados</h1>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body center-block">
+                        <br />
+                        <div class="container-fluid Centrar-Medio">
+                            <asp:GridView ID="gvUsuario" runat="server" CssClass="table table-responsive table-bordered table-condensed table-hover"></asp:GridView>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>

@@ -16,6 +16,7 @@ namespace libEscuelaOpe
         private string strNombreUsuario;
         private string strContrasena;
         private string strIdentificacion;
+        private int intIdRol;
         private string strRol;
         private string strNombre;
         private string strEmail;
@@ -70,6 +71,7 @@ namespace libEscuelaOpe
         #region "Propiedades"
         public string NombreUsuario { get => strNombreUsuario; set => strNombreUsuario = value; }
         public string Rol { get => strRol; set => strRol = value; }
+        public int IdRol { get => intIdRol; set => intIdRol = value; }
         public string Identificacion { get => strIdentificacion; set => strIdentificacion = value; }
         public string Error { get => strError; }
         public string Contrasena { get => strContrasena; set => strContrasena = value; }
@@ -520,6 +522,38 @@ namespace libEscuelaOpe
             }
         }
 
+        public bool cargarUsuariosOpe()
+        {
+            try
+            {
+                if (!validar("cargarUsuariosOpe"))
+                {
+                    return false;
+                }
+                clsUsuariosRN objRn = new clsUsuariosRN(this.strNombreApp);
+
+                if (!objRn.cargarUsuarios())
+                {
+                    strError = objRn.Error;
+                    objRn = null;
+                    return false;
+                }
+
+                if (!llenarGrid(objRn.DatosRptaBd.Tables[0]))
+                {
+                    objRn = null;
+                    return false;
+                }
+                objRn = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                strError = ex.Message;
+                return false;
+            }
+        }
+
         public bool consultarUsuarioOpe()
         {
             try
@@ -594,6 +628,108 @@ namespace libEscuelaOpe
             {
                 strError = ex.Message;
                 return false;
+            }
+        }
+
+        public bool registrarUsuarioOpe()
+        {
+            try
+            {
+                if (!validar("registrarUsuarioOpe"))
+                {
+                    return false;
+                }
+                clsUsuariosRN objUsuarioRN = new clsUsuariosRN(this.strNombreApp);
+                objUsuarioRN.NombreUsuario = strNombreUsuario;
+                objUsuarioRN.Email = strEmail;
+                objUsuarioRN.Contrasena = strContrasena;
+                objUsuarioRN.Identificacion = strIdentificacion;
+                objUsuarioRN.Nombre = strNombre;
+                objUsuarioRN.Apellido = strApellido;
+                objUsuarioRN.FechaNacimiento = strFechaNacimiento;
+                objUsuarioRN.Telefono = strTelefono;
+                objUsuarioRN.IdRol = intIdRol;
+
+                if (!objUsuarioRN.registrarUsuarioOpeRN())
+                {
+                    strError = objUsuarioRN.Error;
+                    objUsuarioRN = null;
+                    return false;
+                }
+                if (objUsuarioRN.DatosRptaBd.Tables[0].Rows[0]["CodRpta"].ToString() == "1")
+                {
+                    strError = objUsuarioRN.DatosRptaBd.Tables[0].Rows[0]["Mensaje"].ToString();
+                    objUsuarioRN = null;
+                    return false;
+                }
+                if (objUsuarioRN.DatosRptaBd.Tables.Count > 1)
+                {
+                    if (!llenarGrid(objUsuarioRN.DatosRptaBd.Tables[1]))
+                    {
+                        objUsuarioRN = null;
+                        return false;
+                    }
+                }
+                strMensaje = objUsuarioRN.DatosRptaBd.Tables[0].Rows[0]["Mensaje"].ToString();
+                objUsuarioRN = null;
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                strMensaje = ex.Message;
+                return false;
+            }
+        }
+
+        public bool modificarUsuarioOpe()
+        {
+            try
+            {
+                if (!validar("modificarusuarioope"))
+                {
+                    return false;
+                }
+                clsUsuariosRN objUsuarioRN = new clsUsuariosRN(this.strNombreApp, formulario);
+
+
+                objUsuarioRN.NombreUsuario = strNombreUsuario;
+                objUsuarioRN.Email = strEmail;
+                objUsuarioRN.Identificacion = strIdentificacion;
+                objUsuarioRN.Contrasena = strContrasena;
+                objUsuarioRN.Nombre = strNombre;
+                objUsuarioRN.Apellido = strApellido;
+                objUsuarioRN.FechaNacimiento = strFechaNacimiento;
+                objUsuarioRN.Telefono = strTelefono;
+
+                if (!objUsuarioRN.modificarUsuarioOpeRN())
+                {
+                    strError = objUsuarioRN.Error;
+                    objUsuarioRN = null;
+                    return false;
+                }
+                if (objUsuarioRN.DatosRptaBd.Tables[0].Rows[0]["CodRpta"].ToString() == "1")
+                {
+                    strError = objUsuarioRN.DatosRptaBd.Tables[0].Rows[0]["Mensaje"].ToString();
+                    objUsuarioRN = null;
+                    return false;
+                }
+                if (objUsuarioRN.DatosRptaBd.Tables.Count > 1)
+                {
+                    if (!llenarGrid(objUsuarioRN.DatosRptaBd.Tables[1]))
+                    {
+                        objUsuarioRN = null;
+                        return false;
+                    }
+                }
+                strMensaje = objUsuarioRN.DatosRptaBd.Tables[0].Rows[0]["Mensaje"].ToString();
+                objUsuarioRN = null;
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
