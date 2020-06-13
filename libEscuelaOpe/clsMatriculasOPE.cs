@@ -369,7 +369,7 @@ namespace libEscuelaOpe
             }
             catch (Exception ex)
             {
-                strMensaje =  ex.Message.ToString();
+                strError =  ex.Message.ToString();
                 return false;
             }
         }

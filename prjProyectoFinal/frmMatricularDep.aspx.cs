@@ -458,6 +458,7 @@ namespace prjProyectoFinal
                 default:
                     goto case 0;
             }
+            limpiarControles("");
         }
 
         protected void ddlDeporte_SelectedIndexChanged(object sender, EventArgs e)

@@ -513,7 +513,7 @@ CREATE PROCEDURE[dbo].[SP_ModificarUsuario]
 AS
 	IF @formulario='frmGestHijo'
 	BEGIN
-		DECLARE @IdEstudiante VARCHAR(3)
+		DECLARE @IdEstudiante VARCHAR(5)
 		SET @IdEstudiante = (select [id] from usuarios WHERE identificacion=@identificacion)
 
 		IF NOT EXISTS(SELECT id as id_usuario FROM usuarios WHERE nombre_usuario=@nombre_usuario AND id !=@IdEstudiante)
@@ -729,6 +729,8 @@ AS
 
 		IF NOT EXISTS(select * from grupo_matricula WHERE grupo_id = @IdGrupo)
 		BEGIN
+			SET @IdMatricula = (select [id] from matriculas where estudiante_id=@IdEstudiante)
+
 			INSERT INTO grupo_matricula(grupo_id, matricula_id) values (@IdGrupo, @IdMatricula)
 			SELECT '0' AS CodRpta,
 					'Deporte matriculado exitosamente' AS Mensaje
@@ -763,7 +765,7 @@ AS
 		END
 	END
 
-	DECLARE @IdEstudiante VARCHAR(3)
+	DECLARE @IdEstudiante VARCHAR(5)
 	SET @IdEstudiante = (select [id] from usuarios WHERE identificacion=@DocEstudiante)
 
 	IF EXISTS (SELECT gr.id as id_grupo
@@ -785,8 +787,30 @@ AS
 				WHERE us.id = @IdEstudiante AND  dp.id = @IdDeporte
 		RETURN
 	END
-	SELECT '0' AS CodRpta,
+	SELECT '1' AS CodRpta,
 				'El estudiante no tiene matriculado ese deporte' AS Mensaje
+GO
+
+/*Modificar Matricula(REALIZAR PROCEDIMIENTO ALAMACENADO DE CONSULTA MATRICULA E IMPLEMENTARLO EN VISUAL)*/ 
+CREATE PROCEDURE[dbo].[SP_ModificarMatricula]
+@DocEstudiante VARCHAR(20),
+@IdGrupoViejo INT,
+@IdGrupoNuevo INT
+AS
+	
+	DECLARE @IdEstudiante VARCHAR(5)
+	SET @IdEstudiante = (select [id] from usuarios WHERE identificacion=@DocEstudiante)
+
+	DECLARE @IdMatricula VARCHAR(3)
+	SET @IdMatricula = (select [id] from matriculas WHERE estudiante_id=@IdEstudiante)
+
+	UPDATE grupo_matricula 
+	SET grupo_id = @IdGrupoNuevo
+	WHERE grupo_id = @IdGrupoViejo AND matricula_id = @IdMatricula
+
+	SELECT '0' AS CodRpta,
+			'Matricula modificada correctamente' AS Mensaje
+	EXEC SP_CargarMatriculas
 GO
 
 /*Eliminar Deporte de Matricula*/
@@ -837,7 +861,7 @@ AS
 		RETURN
 	END
 
-	DECLARE @IdUsuario VARCHAR(3)
+	DECLARE @IdUsuario VARCHAR(5)
 	SET @IdUsuario = (select [id] from usuarios WHERE identificacion=@Documento)
 
 	SELECT '0' AS CodRpta,
@@ -866,7 +890,7 @@ AS
 		RETURN
 	END
 
-	DECLARE @IdUsuario VARCHAR(3)
+	DECLARE @IdUsuario VARCHAR(5)
 	SET @IdUsuario = (select [id] from usuarios WHERE identificacion=@Documento)
 
 	INSERT INTO rol_usuario (rol_id, usuario_id) values(@IdRol, @IdUsuario)

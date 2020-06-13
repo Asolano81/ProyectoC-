@@ -427,7 +427,7 @@ CREATE PROCEDURE[dbo].[SP_ModificarMatricula]
 @IdGrupoNuevo INT
 AS
 	
-	DECLARE @IdEstudiante VARCHAR(3)
+	DECLARE @IdEstudiante VARCHAR(5)
 	SET @IdEstudiante = (select [id] from usuarios WHERE identificacion=@DocEstudiante)
 
 	DECLARE @IdMatricula VARCHAR(3)
